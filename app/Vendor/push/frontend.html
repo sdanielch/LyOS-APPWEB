@@ -1,0 +1,69 @@
+<script type="text/javascript" src="/prototype.js"></script>
+<script>
+	var Comet = Class.create();
+	xhrPool = [];
+	Comet.prototype = {
+		// ROOT . DS . APP_DIR . DS . "Vendor" . DS . "push" . DS . "backend.php"
+		timestamp: 0,
+		url: 'backend.php',
+		noerror: true,
+		initialize: function() { },
+		connect: function()
+		{
+			this.ajax = new Ajax.Request(this.url, {
+				method: 'get',
+				parameters: { 'timestamp' : this.timestamp },
+				async:true,
+				onSuccess: function(transport) {
+					// manejar la respuesta del servidor
+					var response = transport.responseText.evalJSON();
+					this.comet.timestamp = response['timestamp'];
+					this.comet.handleResponse(response);
+					this.comet.noerror = true;
+					//this.comet.disconnect();
+				},
+				beforeSend: function (jqXHR, settings) {
+					xhrPool.push(jqXHR);
+				},
+				onComplete: function(transport) {
+					// enviar una nueva solicitud de ajax cuando finalice esta solicitud
+					if (!this.comet.noerror) {
+						console.warn("ha ocurrido un error...")
+						// si se produce un problema de conexión , intente volver a conectar cada 5 segundos
+						setTimeout(function () {
+							comet.connect()
+						}, 5000);
+					} else {
+
+						this.comet.connect();
+						this.comet.noerror = false;
+					}
+				}
+			});
+			this.ajax.comet = this;
+		},
+
+		disconnect: function()
+		{
+			console.error("DESCONECTADO")
+		},
+
+		handleResponse: function(response)//recibimos la respuesta en tiempo real
+		{
+			console.log(response['msg']);
+		},
+
+		doRequest: function(request)//enviar el nuevo mensaje
+		{
+
+			new Ajax.Request(this.url, {
+				method: 'get',
+				parameters: { 'msg' : request }
+			});
+		}
+
+	}
+	var comet = new Comet();
+	comet.connect();//instancia un objeto
+
+		</script>

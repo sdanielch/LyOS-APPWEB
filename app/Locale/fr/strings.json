@@ -1,0 +1,15 @@
+{
+    "dashboard": "Dashboard funcionando. Aqui es donde estará toda la información. <h1>Spanish</h1>",
+	"initbutton": "Iniciar sesión",
+	"sevus": "Servicios de usuario",
+	"welcome": "Bienvenido",
+	"email": "Email",
+	"password": "Contraseña",
+    "initsesion": "Inicia sesión",
+    "register": "Registrate gratis",
+	"login": "Iniciar sesión",
+	"changedi10n" : "<i class=\"fas fa-language\"></i> Cambio de idioma realizado",
+	"changedi10n.msg" : "Se ha establecido \"Español de España \" como idioma por defecto",
+	"queesopenlove" : "¿Qué es Openlove.ME?",
+	"queesopenlove.1" : "Openlove.ME es una plataforma en internet, donde las personas, de una forma sencilla, pueden conocerse, sin preocuparse de los estereotipos de género o raza, siguiendo una filosofía Queer. Una red de contactos."
+}

@@ -1,0 +1,107 @@
+[
+	{
+		"titulo": "Talleres en el club de las hadas",
+		"descripcion": "Ven a nuestra cafetería y club para niños y mientras tú te tomas un delicioso café o te vas de recados. Horario de Lunes a Sábado de 16h a 20h. Teléfono: 627010002",
+		"imagen" : "http://www.juntines.com/thumbnails/uploads/files/n4167/Club%20de%20las%20hadas%201.jpg?w=209&h=157",
+		"ubicacion" : "Calle Parc, 46 Palma de Mallorca",
+		"grupo" : "talleres"
+	},
+	{
+		"titulo": "Centro infantil Gymboree Play",
+		"descripcion": "Si vivís en Mallorca, conoced Gymboree Play & Music, un sitio genial para pasar un buen rato y aprender al ritmo de la música. Gymboree es un centro de actividades para niños de 0 a 5 años. Psicomotricidad, música y arte para aprender jugando en un entorno bilingüe español-inglés. Teléfono:  971731283, correo: mallorca@gymboree.es",
+		"imagen" : "http://www.juntines.com/thumbnails/uploads/files/n3933/gymboree.jpg?w=580&h=325",
+		"ubicacion" : "Camino de la Vileta, 7 07013 Palma de Mallorca",
+		"grupo" : "talleres"
+	},
+	{
+		"titulo": "Taller de Arte Crocodile",
+		"descripcion": "Clases de dibujo y pintura para niños a partir de 4 años. Teléfono: 600588988 , correo: marta@tallerdeartecrocodile.com",
+		"imagen" : "http://www.juntines.com/thumbnails/uploads/files/n3562/imagen-taller-de-arte-crocodile-0.jpg?w=580&h=325",
+		"ubicacion" : "C/ Ticià, 30, bajos izquierda, 07003 Palma de Mallorca",
+		"grupo" : "talleres"
+	},
+	{
+		"titulo": "Palma Aquarium",
+		"descripcion": "Palma Aquarium es una de las actividades para niños en Mallorca más interesante y divertida para toda la familia. Teléfono: 971 746 104 ",
+		"imagen" : "http://www.juntines.com/thumbnails/uploads/files/n9728/01%20Palma-Aquarium-Big-Blue-Tiburones.jpg?w=580&h=325",
+		"ubicacion" : "Manuela de los Herreros, 21  07610",
+		"grupo" : "cumpleaños"
+	},
+	{
+		"titulo": "Celebra tu cumpleaños en Dock39",
+		"descripcion": "Dock39 Fan dispone de las mejores instalaciones de Mallorca para hacer de tus fiestas de cumpleaños un día inolvidable. Teléfono: 971 59 00 17 ",
+		"imagen" : "http://www.juntines.com/thumbnails/uploads/files/n9003/Cumplea%C3%B1os%20Dock39%20Fan.jpg?w=580&h=325",
+		"ubicacion" : "Carrer Cardenal Rossell 168 (Coll d’en Rabassa) 07007 Palma de Mallorca",
+		"grupo" : "cumpleaños"
+	},
+	{
+		"titulo": "Mago para niños",
+		"descripcion": "Divertidos trucos de magia para sorprender a los niños. Espectáculo de magia infantil en el que cuidamos todos los detalles no solo para ilusionar y sorprender a los niños sino para entretenerles y hacer reír, haciendo que el show de magia para niños les resulte inolvidable. Teléfono: 692 73 64 39, WEB: www.animacionfiestas.com ",
+		"imagen" : "http://www.juntines.com/uploads/files/n8316/espectaculo%20magia.jpg",
+		"ubicacion" : "Palma de Mallorca",
+		"grupo" : "cumpleaños"
+	},
+	{
+		"titulo": "Conoce Artestruz",
+		"descripcion": "Una granja donde aprenderéis la vida de las aves. Teléfono: 639721735 / 60631711 ",
+		"imagen" : "http://www.juntines.com/thumbnails/uploads/files/n9862/dinos004.jpg?w=580&h=325",
+		"ubicacion" : "ARTESTRUZ, Mallorca",
+		"grupo" : "parquestematicos"
+	},
+	{
+		"titulo": "Marineland Mallorca",
+		"descripcion": "Tiene el delfinario más galardonado de España. Teléfono: 971 67 51 25 ",
+		"imagen" : "http://www.juntines.com/thumbnails/uploads/files/n5060/acuario%20II.jpg?w=580&h=325",
+		"ubicacion" : "Carrer Garcilaso de la Vega, 9, 07181 Costa d'en Blanes, Mallorca, Illes Balears",
+		"grupo" : "parquestematicos"
+	},
+	{
+		"titulo": "Western Park",
+		"descripcion": "El único parque acuático ambientado en el oeste, Este parque acuático tiene una ambientación especial: un saloon, búfalos, indios y vaqueros...¿os lo imagináis? ¡Pues venid a comprobarlo!. Teléfono: 971 13 12 03 ",
+		"imagen" : "http://www.juntines.com/uploads/files/n4654/toboganes%20mall.PNG",
+		"ubicacion" : "Figuera a Sa Porrasa, 07182, Magaluf, Mallorca, Islas Baleares",
+		"grupo" : "parquestematicos"
+	},
+	{
+		"titulo": "Viajes en globo",
+		"descripcion": "Ahora podéis conocer la isla de Mallorca desde los aires. Teléfono: 971 59 69 69 ",
+		"imagen" : "http://www.juntines.com/thumbnails/uploads/files/n6092/mallorca%20ballons.jpg?w=580&h=325",
+		"ubicacion" : "Manacor, Mallorca",
+		"grupo" : "excursiones"
+	},
+	{
+		"titulo": "La Granja de los Esporlas",
+		"descripcion": "Disfrutad de este maravilloso entorno, donde veréis los animales de la granja, pasearéis por los bonitos jardines con puentes, flores, cascadas...e incluso podréis ver espectáculos ecuestres y muestras artesanales. Teléfono: 971610032",
+		"imagen" : "http://www.juntines.com/uploads/files/2589/hy25m.jpg",
+		"ubicacion" : "Museo la Granja de Esporles, Serra de Tramuntana, Carretera Esporles-Banyalbufar, km 1.5, 07190 Espo",
+		"grupo" : "excursiones"
+	},
+	{
+		"titulo": "Reserva Puig de Galatzo",
+		"descripcion": "Podréis hacer una pequeña ruta guiada disfrutando de la flora y la fauna. Lo mejor es que, al final del recorrido, hay unas cascadas y piscinas en plena naturaleza donde podréis parar a daos un chapuzón. Teléfono: 971-616 622",
+		"imagen" : "http://www.juntines.com/uploads/files/2581/ci1j4.jpg",
+		"ubicacion" : "Puigpunyent, Islas Baleares",
+		"grupo" : "excursiones"
+	},
+	{
+		"titulo": "Dock Café",
+		"descripcion": "En nuestro centro de Mallorca podrás disfrutar también de la mejor gastronomía en Dock Restaurant Café. Degusta nuestros mejores platos en nuestra sala interior; o en nuestra terraza. Acogedor y diferente, descubre Dock Restaurant Café en nuestros centros Dock39. Teléfono: 971 59 00 17",
+		"imagen" : "http://www.juntines.com/thumbnails/uploads/files/n9006/Flyer%20Dock%20Caf%C3%A9.jpg?w=580&h=325",
+		"ubicacion" : "Carrer Cardenal Rossell 168 (Coll d’en Rabassa) 07007 Palma de Mallorca",
+		"grupo" : "restaurantes"
+	},
+	{
+		"titulo": "Sa Juguetería",
+		"descripcion": "Sa Juguetería posee una colección de 3.000 piezas de lo más variadas porque hay juguetes de toda clase de materiales, desde papel hasta hojalata, y con toda clase de mecanismos, desde pilas hasta alcohol. La colección pertenece a Antoni Roig Clar que la comenzó en Barcelona allá por 1975. Teléfono: 606 427 526",
+		"imagen" : "http://www.juntines.com/uploads/files/n4391/Museo%20de%20Sa%20jugueta-%20Juntines.png",
+		"ubicacion" : "Carrer Pes del Formatge 4, Palma de Mallorca",
+		"grupo" : "restaurantes"
+	},
+	{
+		"titulo": "Block House",
+		"descripcion": "Restaurante alemán especializado en carnes, cómodo para ir en familia. El Block House está especializado en steaks, pero si soís amantes de las ensaladas os encontraréis muy a gusto en este establecimiento. Las luces, la música y la decoración harán que os sintáis como en casa. Además desde su página web podréis hacer pedidos online Teléfono: 971434170",
+		"imagen" : "http://www.juntines.com/uploads/files/n3089/bh_logo2011.png",
+		"ubicacion" : "Passeig Mallorca, 16, 07012 Palma de Mallorca, Islas Baleares",
+		"grupo" : "restaurantes"
+	}
+]
