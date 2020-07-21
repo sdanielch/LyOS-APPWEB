@@ -123,8 +123,8 @@ jQuery(document).ready(function ($) {
 	});
 	$(document).on("click", function (e) {
 		/*$("#olaucher").hide(300);*/
-		console.log($(e.target).hasClass('ncm'))
-		console.warn($(e.target).parent().parent().hasClass('ncm'));
+		//console.log($(e.target).hasClass('ncm'))
+		//console.warn($(e.target).parent().parent().hasClass('ncm'));
 		//console.log($(e.target).parent().parent().attr('id'))
 		if ($(e.target).hasClass('ncm') == true ||
 			$(e.target).parent().hasClass('ncm') == true ||
@@ -140,6 +140,117 @@ jQuery(document).ready(function ($) {
 
 
 	console.log("Proyecto iniciado correctamente.");
+
+
+
+	/*
+	 * contenido: LINK DE DATOS
+	 * tipo: fecth o iframe
+	 * ancho: en px
+	 * alto: en px
+	 * pi: (permitir varias instancias) true o false
+	 */
+
+
+
+
+	function createwindow(contenido, tipo, ancho, alto, pi) {
+
+		if (tipo == undefined) {
+			var tipo = "iframe";
+		}
+		if (ancho == undefined) {
+			var ancho = 500;
+		}
+		if (alto == undefined) {
+			var alto = 350;
+		}
+		if (pi == undefined) {
+			var pi = true;
+		}
+
+		// Posición aleatoria de las ventanas (WM)
+		var app_alto = $(window).height();
+		var app_ancho = $(window).width();
+
+
+
+		$(".window").removeClass("active")
+		var win_idn = Math.floor(Math.random() * 85000) + 1;
+		var win_id = "win_" + win_idn;
+		// Se crea la ventana
+		$("body").append("<div class='window active' id='"+win_id+"' style='width: 100%; height: 100%; max-width: "+ancho+"px; max-height: "+alto+"px;'><div class='resizer'></div></div>");
+		// Se crea la barra de títulos
+		$('#'+win_id).append("<span class='wmtitle wmt_"+win_idn+"'>Haciendo test</span> ");
+		// Se crea el espacio los botones de minimizar, maximizar/restaurar y cerrar
+		$('#'+win_id).append("<div class='wmbuttons wmb_"+win_idn+"'></div>");
+		// BOTON DE CERRAR
+		$(".wmb_"+win_idn).append("<div class='close_window_button wmbc_"+win_idn+"'> <i class=\"fas fa-times-circle\"></i> </div>");
+		$('#'+win_id).append("<div class='wmcontain wmc_"+win_idn+"'>Haciendo test<p>Haciendo test</p></div>");
+
+
+		// TEMAS DE BOTONES PARA MINIMIZAR Y DEMAS
+		$(".wmbc_"+win_idn).on("click", function (e) {
+			$('#'+win_id).addClass("wmcierre");
+			setTimeout(function(){ $('#'+win_id).remove(); }, 300);
+		});
+
+
+		// TEMAS DE MOVIMIENTO
+		$('#'+win_id).pep({
+			cssEaseDuration:300,
+			constrainTo: 'window',
+			shouldEase: false,
+			debug: false,
+			allowDragEventPropagation: false,
+			elementsWithInteraction: "div",
+			disableSelect: false,
+			useCSSTranslation: false,
+			start: function(){
+				$(".window").removeClass("active");
+				$('#'+win_id).addClass("active");
+			},
+		}).on("click", function (e) {
+			$(".window").removeClass("active");
+			$('#'+win_id).addClass("active");
+		}).resizable({
+			onDrag: function (e, $el, newWidth, newHeight, opt) {
+				// limit box size
+				if (newWidth < 300)
+					newWidth = 300;
+				$($el).css({"max-width": newWidth, "max-height": newHeight})
+				if (newHeight < 200)
+					newHeight = 200;
+
+				$el.width(newWidth);
+				$el.height(newHeight);
+
+				// explicitly return **false** if you don't want
+				// auto-height computation to occur
+				return false;
+			},
+			onDragStart: function (e, $el, opt) {
+				$el.css("cursor", "nwse-resize");
+			},
+			onDragEnd: function (e, $el, opt) {
+				$el.css("cursor", "");
+			},
+			handleSelector: "> .resizer"
+		});
+
+
+		return win_id;
+	}
+	createwindow();
+	createwindow();
+
+
+
+
+
+
+
+
 
 
 });

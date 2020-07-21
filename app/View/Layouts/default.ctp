@@ -3,7 +3,7 @@
 <head>
 	<?php echo $this->Html->charset(); ?>
 	<title>
-		LyOS -
+		LineOS -
 		<?php echo $this->fetch('title'); ?>
 	</title>
 
@@ -37,7 +37,7 @@
 	<meta name="title" content="<?php if (isset($titletag)) {
 		echo $titletag;
 	} else {
-		echo "LyOS";
+		echo "LineOS";
 	} ?>">
 	<meta name="description" content="<?php if (isset($descripciontag)) {
 		echo $descripciontag;
@@ -57,6 +57,8 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
 	<script src="<?php echo $fundamental_libs; ?>jquery.3.5.1.min.js"></script>
+	<script src="<?php echo $fundamental_libs; ?>jquery.pep.js"></script>
+	<script src="<?php echo $fundamental_libs; ?>wm_resizable.js"></script>
 	<script src="<?php echo $fundamental_libs; ?>jquery.touchSwipe.min.js"></script>
 	<script src="<?php echo $fundamental_libs; ?>popper.min.js"></script>
 	<link rel="stylesheet" href="<?php echo $fundamental_libs; ?>uikit-3.4.6/css/uikit.min.css"/>
@@ -201,87 +203,13 @@
 <div class="mprogramas ncm">
 
 </div>
+	<div class="mopciones nmc">
+	<img src="<?php echo $img;?>logo.png" style="width: 96px; border-radius: 500px;">
+		<hr style="background: rgba(255,255,255,0.2);">
+	</div>
 </div>
 <footer style="color: #FFF; position: fixed; bottom: 0; left: 0; right: 0; background: transparent url('<?php echo $img; ?>bottombar.png'); height: 30px; z-index: 1000; backdrop-filter: blur(8px) saturate(180%);">
-	<style>
-		.mprogramas {
-			position: absolute;
-			top: 10px;
-			left: 10px;
-			bottom: 10px;
-			background: rgba(255,255,255,0.75);
-			width: calc(100% - 20px);
-			max-width: 285px;
-			border-radius: 4px;
-		}
-		#launcher {
-			position: fixed;
-			left: 10px;
-			top: 2px;
-			bottom: 0;
-			font-size: 22px;
-			cursor: pointer;
-			color: #FFF;
-			transition: 300ms;
-		}
 
-		#launcher:hover {
-			color: #FFFF00;
-			transform: scale(1.2);
-			text-shadow: 1px 1px 4px #000;
-		}
-
-		#launcher:active {
-			color: rgba(255, 255, 255, 0.75);
-			transform: scale(0.8);
-		}
-
-		#trayicons {
-			position: absolute;
-			right: 10px;
-			top: 0;
-			bottom: 0;
-			display: flex;
-			align-items: center;
-			justify-content: center;
-		}
-		#clock {
-			font-weight: bold;
-			text-shadow: 1px 1px 4px #000;
-			cursor: pointer;
-
-		}
-		#olaucher {
-			position: fixed;
-			bottom: 35px;
-			left: 5px;
-			width: calc(100% - 10px);
-			max-width: 480px;
-			display: none;
-			height: 95%;
-			max-height: 520px;
-			border-radius: 10px;
-			background: rgba(0,0,0,0.85);
-			z-index: 100;
-			backdrop-filter: blur(8px) saturate(180%);
-			animation-duration: 300ms;
-			animation-name: olauncher;
-			transform: scale(1);
-		}
-
-		@keyframes olauncher {
-			from {
-				opacity: 0;
-				transform: scale(0.8);
-			}
-
-			to {
-				opacity: 1;
-				transform: scale(1);
-			}
-		}
-
-	</style>
 	<div id="launcher" class="ncm">
 		<i class="fas fa-rocket ncm"></i>
 	</div>
