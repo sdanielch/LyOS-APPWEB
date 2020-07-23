@@ -154,8 +154,10 @@ jQuery(document).ready(function ($) {
 
 
 
-	function createwindow(contenido, tipo, ancho, alto, pi) {
-
+	function createwindow(nombre, contenido, tipo, ancho, alto, pi) {
+		if (nombre == undefined) {
+			var nombre = "App";
+		}
 		if (tipo == undefined) {
 			var tipo = "iframe";
 		}
@@ -170,8 +172,20 @@ jQuery(document).ready(function ($) {
 		}
 
 		// Posición aleatoria de las ventanas (WM)
-		var app_alto = $(window).height();
-		var app_ancho = $(window).width();
+		function getRandom(min, max) {
+			return Math.floor(Math.random() * (max - min)) + min;
+		}
+		var win_alto = $(window).height();
+		var win_ancho = $(window).width();
+		var app_alto = alto;
+		var app_ancho = ancho;
+
+		var pinki1 = win_alto - app_alto;
+		var pinki2 = win_ancho - app_ancho;
+
+		var app_top = getRandom(0,pinki1);
+		var app_left = getRandom(0, pinki2);
+
 
 
 
@@ -179,19 +193,73 @@ jQuery(document).ready(function ($) {
 		var win_idn = Math.floor(Math.random() * 85000) + 1;
 		var win_id = "win_" + win_idn;
 		// Se crea la ventana
-		$("body").append("<div class='window active' id='"+win_id+"' style='width: 100%; height: 100%; max-width: "+ancho+"px; max-height: "+alto+"px;'><div class='resizer'></div></div>");
+		$("body").append("<div class='window active' id='"+win_id+"' style='top: "+app_top+"px; left: "+app_left+"px;width: 100%; height: 100%; max-width: "+ancho+"px; max-height: "+alto+"px;'><div class='resizer'></div></div>");
 		// Se crea la barra de títulos
-		$('#'+win_id).append("<span class='wmtitle wmt_"+win_idn+"'>Haciendo test</span> ");
+		$('#'+win_id).append("<span class='wmtitle wmt_"+win_idn+"'>"+nombre+"</span> ");
 		// Se crea el espacio los botones de minimizar, maximizar/restaurar y cerrar
 		$('#'+win_id).append("<div class='wmbuttons wmb_"+win_idn+"'></div>");
+
+
+		// BOTON DE MINIMIZAR
+		$(".wmb_"+win_idn).append("<div class='mm_window_button wmbm_"+win_idn+"' style='margin-right: 6px;'> <i class=\"fas fa-window-minimize\"></i> </div>");
+
+		// BOTON DE MAXIMIZAR
+		$(".wmb_"+win_idn).append("<div class='mr_window_button wmbr_"+win_idn+"'> <i class=\"far fa-window-maximize\"></i> </div>");
+
+
 		// BOTON DE CERRAR
 		$(".wmb_"+win_idn).append("<div class='close_window_button wmbc_"+win_idn+"'> <i class=\"fas fa-times-circle\"></i> </div>");
+
+
 		$('#'+win_id).append("<div class='wmcontain wmc_"+win_idn+"'>Haciendo test<p>Haciendo test</p></div>");
 
 
+
+		// TASKBAR
+		$("#taskmanager").append("<div class='task task_"+win_idn+"'>"+nombre+"</div>")
+		$(".task").removeClass("activetask");
+		$(".task_"+win_idn).addClass("activetask").on("click", function (e) {
+			$(".task").removeClass("activetask");
+			$(this).addClass("activetask");
+			$(".window").removeClass("active");
+			$('#'+win_id).addClass("active");
+			if ($('#'+win_id).hasClass("wminimized")) {
+				$('#'+win_id).removeClass("wminimized");
+			}
+		});
+
+
+
+
 		// TEMAS DE BOTONES PARA MINIMIZAR Y DEMAS
+
+		$(".wmbm_"+win_idn).on("click", function (e) {
+			$('#'+win_id).addClass("wminimized").removeClass("active");
+		});
+
+		$(".wmbr_"+win_idn).on("click", function (e) {
+			if ($('#'+win_id).hasClass("maximized")) {
+				$('#'+win_id).removeClass("maximized");
+				$(this).html("<i class=\"far fa-window-maximize\"></i>");
+			} else {
+				$('#'+win_id).addClass("maximized");
+				$(this).html("<i class=\"far fa-window-restore\"></i>");
+			}
+		});
+
+		$( ".wmt_"+win_idn ).dblclick(function() {
+			if ($('#'+win_id).hasClass("maximized")) {
+				$('#'+win_id).removeClass("maximized");
+				$(".wmbr_"+win_idn).html("<i class=\"far fa-window-maximize\"></i>");
+			} else {
+				$('#'+win_id).addClass("maximized");
+				$(".wmbr_"+win_idn).html("<i class=\"far fa-window-restore\"></i>");
+			}
+		});
+
 		$(".wmbc_"+win_idn).on("click", function (e) {
 			$('#'+win_id).addClass("wmcierre");
+			$(".task_"+win_idn).remove();
 			setTimeout(function(){ $('#'+win_id).remove(); }, 300);
 		});
 
@@ -209,10 +277,18 @@ jQuery(document).ready(function ($) {
 			start: function(){
 				$(".window").removeClass("active");
 				$('#'+win_id).addClass("active");
+				$(".task").removeClass("activetask");
+				$(".task_"+win_idn).addClass("activetask");
+
+				$('#'+win_id).removeClass("maximized");
+				$(".wmbr_"+win_idn).html("<i class=\"far fa-window-maximize\"></i>");
+
 			},
 		}).on("click", function (e) {
 			$(".window").removeClass("active");
 			$('#'+win_id).addClass("active");
+			$(".task").removeClass("activetask");
+			$(".task_"+win_idn).addClass("activetask");
 		}).resizable({
 			onDrag: function (e, $el, newWidth, newHeight, opt) {
 				// limit box size

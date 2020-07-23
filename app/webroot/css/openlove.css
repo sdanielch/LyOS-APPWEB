@@ -1,3 +1,9 @@
+*,
+*::before,
+*::after {
+	box-sizing: border-box;
+}
+
 ::-webkit-scrollbar {
 	width: 8px;
 	background-color: #111111;
@@ -339,6 +345,8 @@ html, body {
 		opacity: 0;
 	}
 }
+
+
 #launcher {
 	position: fixed;
 	left: 10px;
@@ -414,7 +422,22 @@ html, body {
 	box-shadow: 2px 2px 6px rgba(0,0,0,0.4);
 	min-width: 300px !important;
 	min-height: 200px !important;
+	position: absolute;
 
+}
+
+@media (max-width: 640px) {
+	.window {
+		max-width: 100% !important;
+		height: 100% !important;
+		max-height: calc(100% - 32px) !important;
+		width: 100% !important;
+		top: 0 !important;
+		left: 0 !important;
+		right: 0 !important;
+		bottom: 32px !important;
+		transition: 300ms !important;
+	}
 }
 .wmcontain {
 	position: absolute;
@@ -506,7 +529,68 @@ html, body {
 	transition: 300ms;
 }
 
+.maximized {
+	max-width: 100% !important;
+	height: 100% !important;
+	max-height: calc(100% - 32px) !important;
+	width: 100% !important;
+	top: 0 !important;
+	left: 0 !important;
+	right: 0 !important;
+	bottom: 32px !important;
+	transition: 300ms !important;
+}
+
+.wminimized {
+	top: calc(100% + 20px) !important;
+	bottom: auto !important;
+	transition: 300ms !important;
+	position: fixed !important;
+	opacity: 0;
+
+}
+
+.mr_window_button, .mm_window_button {
+	cursor: pointer;
+}
+.mr_window_button:hover, .mm_window_button:hover {
+	color: #0f151b;
+	transition: 300ms;
+}
+
 .active {
 	z-index: 85000 !important;
 	box-shadow: 2px 2px 12px #000;
 }
+#taskmanager {
+	position: absolute;
+	top: 0;
+	right: 100px;
+	left: 50px;
+	height: 30px;
+	display: flex;
+	align-items: center;
+	justify-content: flex-start;
+	background: transparent;
+}
+.task {
+	width: 100%;
+	position: relative;
+	max-width: 160px;
+	border: 2px rgba(150,150,150,0.4) ridge;
+	height: 26px;
+	border-radius: 4px;
+	margin-left: 4px;
+	padding-left: 4px;
+	background: rgba(255,255,255,0.2);
+	cursor: pointer;
+	font-size: 14px;
+	transition: 1400ms;
+}
+
+.activetask {
+	border: 2px rgba(80,80,80,0.4) groove;
+	background: rgba(55,55,55,0.2);
+}
+
+

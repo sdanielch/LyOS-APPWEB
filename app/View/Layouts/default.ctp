@@ -59,6 +59,7 @@
 	<script src="<?php echo $fundamental_libs; ?>jquery.3.5.1.min.js"></script>
 	<script src="<?php echo $fundamental_libs; ?>jquery.pep.js"></script>
 	<script src="<?php echo $fundamental_libs; ?>wm_resizable.js"></script>
+	<script src="<?php echo $fundamental_libs; ?>contextmenu.min.js"></script>
 	<script src="<?php echo $fundamental_libs; ?>jquery.touchSwipe.min.js"></script>
 	<script src="<?php echo $fundamental_libs; ?>popper.min.js"></script>
 	<link rel="stylesheet" href="<?php echo $fundamental_libs; ?>uikit-3.4.6/css/uikit.min.css"/>
@@ -154,7 +155,9 @@
 
 </head>
 <body>
-
+<div id="context-menu" style="display:none;">
+	Cerrar ventana
+</div>
 
 <script>
 
