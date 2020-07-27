@@ -273,6 +273,46 @@ function getBoundaries($lat, $lng, $distance = 1, $earthRadius = 6371)
         }
     }
 
+/*
+ * Función para crear thumnails
+ */
+function compress($source, $destination, $quality) {
+
+	$info = getimagesize($source);
+
+	if ($info['mime'] == 'image/jpeg')
+		$image = imagecreatefromjpeg($source);
+
+	elseif ($info['mime'] == 'image/gif')
+		$image = imagecreatefromgif($source);
+
+	elseif ($info['mime'] == 'image/png')
+		$image = imagecreatefrompng($source);
+
+	imagejpeg($image, $destination, $quality);
+
+	$tnsize1=300;
+	$image = new Imagick($destination);
+	if($image->getImageHeight() <= $image->getImageWidth()) {
+		// Resize image using the lanczos resampling algorithm based on width
+		$image->resizeImage($tnsize1,0,Imagick::FILTER_LANCZOS,1);
+	} else {
+		// Resize image using the lanczos resampling algorithm based on height
+		$image->resizeImage(0,$tnsize1,Imagick::FILTER_LANCZOS,1);
+	}
+
+	$image->setImageCompression(Imagick::COMPRESSION_JPEG);
+// Set compression level (1 lowest quality, 100 highest quality)
+	$image->setImageCompressionQuality(50);
+// Strip out unneeded meta data
+	$image->stripImage();
+	$image->writeImage($destination);
+
+
+
+	return $destination;
+}
+
 
 
 ?>

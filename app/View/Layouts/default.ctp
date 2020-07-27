@@ -209,6 +209,12 @@
 	<div class="mopciones nmc">
 	<img src="<?php echo $img;?>logo.png" style="width: 96px; border-radius: 500px;">
 		<hr style="background: rgba(255,255,255,0.2);">
+		<?php if($usuario == null) {
+			?>
+		<button type="button" onclick="createwindow({nombre: 'Iniciar sesión', tipo: 'ajax', pi: false, contenido: '<?php echo $base;?>users/login', ancho: 800, alto: 450})">Iniciar sesión</button>
+<?php } else { ?>
+		<a href="<?php echo $base;?>users/logout">Cerrar sesión</a>
+		<?php } ?>
 	</div>
 </div>
 <footer style="color: #FFF; position: fixed; bottom: 0; left: 0; right: 0; background: transparent url('<?php echo $img; ?>bottombar.png'); height: 30px; z-index: 1000; backdrop-filter: blur(8px) saturate(180%);">

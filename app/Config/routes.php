@@ -19,3 +19,6 @@ Router::connect('/lovers/backend.php', array('controller' => 'lovers', 'action' 
 // CARGAMOS LAS RUTAS EN EL NUCLEO
 CakePlugin::routes();
 require CAKE . 'Config' . DS . 'routes.php';
+// Cargamos el LOADER PARA PHP 7.2+
+require APP . DS . 'Locale' . DS . 'loader.php';
+

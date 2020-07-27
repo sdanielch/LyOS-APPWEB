@@ -414,5 +414,3 @@ Cache::config('_cake_model_', array(
 
 
 
-// Cargamos el nuevo traductor en el nucleo, con _t("string") se traduce
-require getcwd() . DS . '..' . DS .'Locale' . DS . 'loader.php';

@@ -6,6 +6,7 @@ App::uses('AppController', 'Controller');
 class UsersController extends AppController
 {
 
+	public $layout = "ajax";
 	public function beforeFilter()
 	{
 		parent::beforeFilter();
@@ -134,7 +135,8 @@ class UsersController extends AppController
 
 								if (!$mail->send()) {
 									$this->Rapid->uialert(_t("26", true), _t("25", true));
-									return $this->redirect(array('controller' => 'Web', 'action' => 'entry'));
+									//return $this->redirect(array('controller' => 'Web', 'action' => 'entry'));
+									return $this->redirect(Router::url('/', true));
 								} else {
 
 									// si se ha enviado el correo procedemos a crear la cuenta para su posterior activación
@@ -142,7 +144,8 @@ class UsersController extends AppController
 									$this->User->nuevo_usuario($this->request->data['usuario'], $this->request->data['password1']);
 
 									$this->Rapid->uialert(_t("27", true), _t("28", true), "info");
-									return $this->redirect(array('controller' => 'Web', 'action' => 'entry'));
+									//return $this->redirect(array('controller' => 'Web', 'action' => 'entry'));
+									return $this->redirect(Router::url('/', true));
 
 								}
 
@@ -190,12 +193,14 @@ class UsersController extends AppController
 
 		if ($email == NULL){
 			$this->Rapid->uialert(_t("26",true), _t("37",true), "error");
-			return $this->redirect(array('controller' => 'Web', 'action' => 'entry'));
+			//return $this->redirect(array('controller' => 'Web', 'action' => 'entry'));
+			return $this->redirect(Router::url('/', true));
 		}
 		$setON = desencriptar($email);
 		$this->User->activar_usuario($setON);
 		$this->Rapid->uialert(_t("38",true), _t("39",true), "info");
-		return $this->redirect(array('controller' => 'Web', 'action' => 'entry'));
+		//return $this->redirect(array('controller' => 'Web', 'action' => 'entry'));
+		return $this->redirect(Router::url('/', true));
 
 	}
 
@@ -267,11 +272,12 @@ class UsersController extends AppController
 
 
 
-						$this->Rapid->uialert("¡Bienvenido a Openlove!", "Ya eres parte de la comunidad, actualmente solo puedes iniciar sesión con redes sociales, actualiza tu contraseña desde el panel de control para poder acceder (si quieres) de forma manual.", "info");
+						$this->Rapid->uialert("¡Bienvenido a LineOS!", "Ya eres parte de la comunidad, actualmente solo puedes iniciar sesión con redes sociales, actualiza tu contraseña desde el panel de control para poder acceder (si quieres) de forma manual.", "info");
 						return $this->redirect($this->Auth->redirectUrl());
 					} else {
 						$this->Rapid->uialert(_t("16", true), _t("17", true), "error");
-						return $this->redirect(array('controller' => 'Web', 'action' => 'entry'));
+						//return $this->redirect(array('controller' => 'Web', 'action' => 'entry'));
+						return $this->redirect(Router::url('/', true));
 					}
 
 
@@ -319,7 +325,8 @@ class UsersController extends AppController
 						return $this->redirect($this->Auth->redirectUrl());
 					} else {
 						$this->Rapid->uialert(_t("16", true), _t("17", true), "error");
-						return $this->redirect(array('controller' => 'Web', 'action' => 'entry'));
+						//return $this->redirect(array('controller' => 'Web', 'action' => 'entry'));
+						return $this->redirect(Router::url('/', true));
 					}
 
 
@@ -335,7 +342,8 @@ class UsersController extends AppController
 		} else {
 			$this->Rapid->uialert("Error al recibir datos","Ha ocurrido un error al recibir los datos de su red social, intente iniciar sesión desde su red social más adelante", "error");
 		}
-		return $this->redirect(array('controller' => 'Web', 'action' => 'entry'));
+		//return $this->redirect(array('controller' => 'Web', 'action' => 'entry'));
+		return $this->redirect(Router::url('/', true));
 	}
 
 
@@ -352,7 +360,8 @@ class UsersController extends AppController
 			if ($infopost == NULL) {
 					// Si ha ocurrido esto esque no encuentra el usuario en la base de datos
 				$this->Rapid->uialert(_t("16", true), _t("17", true), "error");
-				return $this->redirect(array('controller' => 'Panel', 'action' => 'index'));
+				//return $this->redirect(array('controller' => 'Panel', 'action' => 'index'));
+				return $this->redirect(Router::url('/', true));
 			} else {
 					// LLegados a este punto el usuario existe, así que vamos a comprobar si puede o no iniciar
 					// sesión tomando en cuenta si esta activo o no
@@ -402,10 +411,12 @@ class UsersController extends AppController
 
 					$this->Rapid->uialert("Usuario logueado","Has iniciado sesión con éxito", "info");
 					//return $this->redirect($this->Auth->redirectUrl());
-					return $this->redirect(array('controller' => 'Panel', 'action' => 'index'));
+					//return $this->redirect(array('controller' => 'Panel', 'action' => 'index'));
+					return $this->redirect(Router::url('/', true));
 				}
 				$this->Rapid->uialert(_t("16", true), _t("17", true), "error");
-				return $this->redirect(array('controller' => 'Panel', 'action' => 'index'));
+				//return $this->redirect(array('controller' => 'Panel', 'action' => 'index'));
+				return $this->redirect(Router::url('/', true));
 			}
 		} else {
 			//return $this->redirect(array('controller' => 'Web', 'action' => 'index'));
@@ -628,6 +639,7 @@ class UsersController extends AppController
 
     public function logout()
     {
+		$this->Rapid->uialert("Usuario deslogueado","Ha salido usted de la sesión", "error");
     	return $this->redirect($this->Auth->logout());
     }
 

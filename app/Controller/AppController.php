@@ -1,7 +1,8 @@
 <?php
 //session_start();
 
-require('../../app/Vendor/vendor/autoload.php');
+//require('../../app/Vendor/vendor/autoload.php');
+require APP . DS . 'Vendor' . DS . 'vendor' . DS . 'autoload.php';
 
 
 App::uses('Controller', 'Controller');
@@ -13,9 +14,7 @@ class AppController extends Controller
 		'Session', 'Rapid', 'DebugKit.Toolbar',
 		'Auth' => array(
 			'loginRedirect' => array('controller' => 'Lovers', 'action' => 'index'),
-			'logoutRedirect' => array(
-				'controller' => 'Web', 'action' => 'entry'
-			),
+			'logoutRedirect' => "/",
 			'authenticate' => array(
 				'Form' => array(
 					'passwordHasher' => 'Blowfish'

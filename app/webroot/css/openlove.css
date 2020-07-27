@@ -461,6 +461,7 @@ html, body {
 	justify-content: flex-start;
 	padding-left: 10px;
 	cursor: move;
+	font-weight: bold;
 }
 
 .wmbuttons {
@@ -594,3 +595,34 @@ html, body {
 }
 
 
+.mopciones button, .mopciones a:link, .mopciones a:visited, .mopciones a {
+	border: 1px rgba(255,255,255,.4) outset;
+	border-radius: 4px;
+	padding: 5px;
+	width: 100%;
+	background: rgba(255,255,255,0.05);
+	color: #FFF;
+	transition: 100ms;
+	display: block;
+	text-decoration: none;
+}
+.mopciones button:hover, .mopciones a:hover {
+	border: 1px rgba(255,255,255,.4) outset;
+	border-radius: 4px;
+	padding: 5px;
+	width: 100%;
+	background: rgba(255, 255, 255, 0.15);
+	color: #FFF;
+	text-decoration: none;
+}
+.mopciones button:active, .mopciones a:active {
+	border: 1px rgba(255,255,255,.4) inset;
+	border-radius: 4px;
+	padding: 5px;
+	width: 100%;
+	background: rgba(255, 255, 255, 0.05);
+	color: #FFF;
+}
+*:focus {
+	outline: none !important;
+}
