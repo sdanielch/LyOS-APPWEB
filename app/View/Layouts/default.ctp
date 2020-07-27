@@ -33,7 +33,7 @@
 
 
 	<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent"/>
-	<meta name="apple-mobile-web-app-title" content="GoRoute!"/>
+	<meta name="apple-mobile-web-app-title" content="LineOS"/>
 	<meta name="title" content="<?php if (isset($titletag)) {
 		echo $titletag;
 	} else {
@@ -60,6 +60,8 @@
 	<script src="<?php echo $fundamental_libs; ?>jquery.pep.js"></script>
 	<script src="<?php echo $fundamental_libs; ?>wm_resizable.js"></script>
 	<script src="<?php echo $fundamental_libs; ?>contextmenu.min.js"></script>
+	<script src="<?php echo $fundamental_libs; ?>ResizeSensor.js"></script>
+	<script src="<?php echo $fundamental_libs; ?>ElementQueries.js"></script>
 	<script src="<?php echo $fundamental_libs; ?>jquery.touchSwipe.min.js"></script>
 	<script src="<?php echo $fundamental_libs; ?>popper.min.js"></script>
 	<link rel="stylesheet" href="<?php echo $fundamental_libs; ?>uikit-3.4.6/css/uikit.min.css"/>
@@ -213,6 +215,7 @@
 			?>
 		<button type="button" onclick="createwindow({nombre: 'Iniciar sesión', tipo: 'ajax', pi: false, contenido: '<?php echo $base;?>users/login', ancho: 800, alto: 450})">Iniciar sesión</button>
 <?php } else { ?>
+			<button type="button" onclick="createwindow({nombre: 'Panel de control', tipo: 'ajax', pi: false, contenido: '<?php echo $base;?>xapps/controlpanel', ancho: 800, alto: 450, icono: '<?php echo $img;?>controlpanel.png'})">Panel de control</button>
 		<a href="<?php echo $base;?>users/logout">Cerrar sesión</a>
 		<?php } ?>
 	</div>

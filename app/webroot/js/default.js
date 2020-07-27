@@ -29,6 +29,32 @@ function  manejoDelError (error) {
 */
 
 
+// FUNCION REMOVE en arrays (el inverso de push)
+function removeFromArray(array, item) {
+	let changed = false;
+	let j, i, len, elt;
+
+	for (j = i = 0, len = array.length; i < len; ++i) {
+		elt = array[i];
+		if (elt === item) {
+			changed = true;
+		} else {
+			array[j++] = elt;
+		}
+	}
+
+	array.length = j;
+	return changed;
+}
+
+
+
+
+
+
+
+
+
 function myFunction() {
 	var x = document.getElementById("UserPassword");
 	if (x.type === "password") {
@@ -168,6 +194,7 @@ jQuery(document).ready(function ($) {
 
 });
 
+var opened_windows = [];
 function createwindow(opciones = {nombre: "App"}) {
 	$("#olaucher").hide(300);
 	// nombre, contenido, icono, tipo, ancho, alto, pi
@@ -194,6 +221,36 @@ function createwindow(opciones = {nombre: "App"}) {
 		opciones.contenido = "about:blank";
 	}
 
+	var win_idn = Math.floor(Math.random() * 85000) + 1;
+	var win_id = "win_" + win_idn;
+
+	var found = false;
+	var findex = -1;
+	for (var i = 0; i < opened_windows.length && !found; i++) {
+		if (opened_windows[i].includes(opciones.contenido)) {
+			found = true;
+			findex = i;
+			break;
+		}
+	}
+
+	if (opciones.pi == false && found == true) {
+		// Si la ventana ya está abierta le damos el foco
+		console.info("Window is already opened");
+		//console.log(opened_windows[findex].split(" ")[2])
+		// Conseguimos la ID de la ventana y la usamos para reactivar el foco
+		var idn = opened_windows[findex].split(" ")[2];
+		$(".task").removeClass("activetask");
+		$(".task_"+idn).addClass("activetask");
+		$(".window").removeClass("active");
+		$('#win_'+idn).addClass("active");
+		if ($('#win_'+idn).hasClass("wminimized")) {
+			$('#win_'+idn).removeClass("wminimized");
+		}
+		// Devolvemos false para salir de la función y no reabrir otro proceso
+		return false;
+	}
+
 
 	// Posición aleatoria de las ventanas (WM)
 	function getRandom(min, max) {
@@ -214,8 +271,7 @@ function createwindow(opciones = {nombre: "App"}) {
 
 
 	$(".window").removeClass("active")
-	var win_idn = Math.floor(Math.random() * 85000) + 1;
-	var win_id = "win_" + win_idn;
+
 	// Se crea la ventana
 	$("body").append("<div class='window active' id='"+win_id+"' style='top: "+app_top+"px; left: "+app_left+"px;width: 100%; height: 100%; max-width: "+opciones.ancho+"px; max-height: "+opciones.alto+"px;'><div class='resizer'></div></div>");
 	// Se crea la barra de títulos
@@ -242,7 +298,7 @@ function createwindow(opciones = {nombre: "App"}) {
 	if (opciones.tipo == "iframe") {
 		$('#'+win_id).append("<div class='wmcontain wmc_"+win_idn+"'><iframe src='"+opciones.contenido+"' allowfullscreen allowusermedia sandbox='allow-forms' style='border: 0; width: 100%; height: 100%; display: block; background: transparent'> Su navegador no soporta el uso de este tipo de aplicación</iframe> </div>");
 	} else {
-		$('#'+win_id).append("<div class='wmcontain wmc_"+win_idn+"' style='overflow: auto'>Cargando aplicación...</div>");
+		$('#'+win_id).append("<div class='wmcontain wmc_"+win_idn+"' style='overflow: auto; padding: 10px;'>Cargando aplicación...</div>");
 		$( ".wmc_"+win_idn ).load( opciones.contenido, function() {
 			console.warn("Aplicación '" + opciones.nombre + "', cargada.")
 		});
@@ -300,6 +356,19 @@ function createwindow(opciones = {nombre: "App"}) {
 	$(".wmbc_"+win_idn).on("click", function (e) {
 		$('#'+win_id).addClass("wmcierre");
 		$(".task_"+win_idn).remove();
+
+
+
+
+
+		opened_windows.forEach(function(elemento, indice) {
+			if(elemento.includes(opciones.contenido)) {
+				toremove = opened_windows[indice];
+				removeFromArray(opened_windows, toremove);
+			}
+
+		});
+
 		setTimeout(function(){ $('#'+win_id).remove(); }, 300);
 	});
 
@@ -353,7 +422,10 @@ function createwindow(opciones = {nombre: "App"}) {
 		},
 		handleSelector: "> .resizer"
 	});
-
+	// Guardamos la URL en el array de ventanas abiertas (SI LA HUBIERA, NO REPETIMOS)
+	if (!opened_windows.includes(opciones.contenido, 0)) {
+		opened_windows.push(opciones.contenido + " :-: " + win_idn);
+	}
 
 	return win_id;
 }

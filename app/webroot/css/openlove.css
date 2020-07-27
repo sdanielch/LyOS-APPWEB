@@ -605,6 +605,8 @@ html, body {
 	transition: 100ms;
 	display: block;
 	text-decoration: none;
+	margin-bottom: 4px;
+	height: 36px;
 }
 .mopciones button:hover, .mopciones a:hover {
 	border: 1px rgba(255,255,255,.4) outset;
