@@ -48,13 +48,6 @@ function removeFromArray(array, item) {
 }
 
 
-
-
-
-
-
-
-
 function myFunction() {
 	var x = document.getElementById("UserPassword");
 	if (x.type === "password") {
@@ -168,7 +161,6 @@ jQuery(document).ready(function ($) {
 	console.log("Proyecto iniciado correctamente.");
 
 
-
 	/*
 	 * OPCIONES: ES UN ARRAY CON TODO LO DE ABAJO ASI NO HAY QUE RECORDAR EL ORDEN DE PARÁMETROS
 	 * contenido: LINK DE DATOS
@@ -179,22 +171,14 @@ jQuery(document).ready(function ($) {
 	 */
 
 
-
 	//createwindow({op: 1, nombre: "Aplicacion"});
 	//createwindow({op: 2});
-
-
-
-
-
-
-
-
 
 
 });
 
 var opened_windows = [];
+
 function createwindow(opciones = {nombre: "App"}) {
 	$("#olaucher").hide(300);
 	// nombre, contenido, icono, tipo, ancho, alto, pi
@@ -241,11 +225,11 @@ function createwindow(opciones = {nombre: "App"}) {
 		// Conseguimos la ID de la ventana y la usamos para reactivar el foco
 		var idn = opened_windows[findex].split(" ")[2];
 		$(".task").removeClass("activetask");
-		$(".task_"+idn).addClass("activetask");
+		$(".task_" + idn).addClass("activetask");
 		$(".window").removeClass("active");
-		$('#win_'+idn).addClass("active");
-		if ($('#win_'+idn).hasClass("wminimized")) {
-			$('#win_'+idn).removeClass("wminimized");
+		$('#win_' + idn).addClass("active");
+		if ($('#win_' + idn).hasClass("wminimized")) {
+			$('#win_' + idn).removeClass("wminimized");
 		}
 		// Devolvemos false para salir de la función y no reabrir otro proceso
 		return false;
@@ -256,6 +240,7 @@ function createwindow(opciones = {nombre: "App"}) {
 	function getRandom(min, max) {
 		return Math.floor(Math.random() * (max - min)) + min;
 	}
+
 	var win_alto = $(window).height();
 	var win_ancho = $(window).width();
 	var app_alto = opciones.alto;
@@ -264,31 +249,29 @@ function createwindow(opciones = {nombre: "App"}) {
 	var pinki1 = win_alto - app_alto;
 	var pinki2 = win_ancho - app_ancho;
 
-	var app_top = getRandom(0,pinki1);
+	var app_top = getRandom(0, pinki1);
 	var app_left = getRandom(0, pinki2);
-
-
 
 
 	$(".window").removeClass("active")
 
 	// Se crea la ventana
-	$("body").append("<div class='window active' id='"+win_id+"' style='top: "+app_top+"px; left: "+app_left+"px;width: 100%; height: 100%; max-width: "+opciones.ancho+"px; max-height: "+opciones.alto+"px;'><div class='resizer'></div></div>");
+	$("body").append("<div class='window active' id='" + win_id + "' style='top: " + app_top + "px; left: " + app_left + "px;width: 100%; height: 100%; max-width: " + opciones.ancho + "px; max-height: " + opciones.alto + "px;'><div class='resizer'></div></div>");
 	// Se crea la barra de títulos
-	$('#'+win_id).append("<span class='wmtitle wmt_"+win_idn+"'> <img src='"+opciones.icono+"' style='margin-right:4px; width: 16px; height: 16px;' /> "+opciones.nombre+"</span> ");
+	$('#' + win_id).append("<span class='wmtitle wmt_" + win_idn + "'> <img src='" + opciones.icono + "' style='margin-right:4px; width: 16px; height: 16px;' /> " + opciones.nombre + "</span> ");
 	// Se crea el espacio los botones de minimizar, maximizar/restaurar y cerrar
-	$('#'+win_id).append("<div class='wmbuttons wmb_"+win_idn+"'></div>");
+	$('#' + win_id).append("<div class='wmbuttons wmb_" + win_idn + "'></div>");
 
 
 	// BOTON DE MINIMIZAR
-	$(".wmb_"+win_idn).append("<div class='mm_window_button wmbm_"+win_idn+"' style='margin-right: 6px;'> <i class=\"fas fa-window-minimize\"></i> </div>");
+	$(".wmb_" + win_idn).append("<div class='mm_window_button wmbm_" + win_idn + "' style='margin-right: 6px;'> <i class=\"fas fa-window-minimize\"></i> </div>");
 
 	// BOTON DE MAXIMIZAR
-	$(".wmb_"+win_idn).append("<div class='mr_window_button wmbr_"+win_idn+"'> <i class=\"far fa-window-maximize\"></i> </div>");
+	$(".wmb_" + win_idn).append("<div class='mr_window_button wmbr_" + win_idn + "'> <i class=\"far fa-window-maximize\"></i> </div>");
 
 
 	// BOTON DE CERRAR
-	$(".wmb_"+win_idn).append("<div class='close_window_button wmbc_"+win_idn+"'> <i class=\"fas fa-times-circle\"></i> </div>");
+	$(".wmb_" + win_idn).append("<div class='close_window_button wmbc_" + win_idn + "'> <i class=\"fas fa-times-circle\"></i> </div>");
 
 
 	/*
@@ -296,83 +279,114 @@ function createwindow(opciones = {nombre: "App"}) {
 	 */
 
 	if (opciones.tipo == "iframe") {
-		$('#'+win_id).append("<div class='wmcontain wmc_"+win_idn+"'><iframe src='"+opciones.contenido+"' allowfullscreen allowusermedia sandbox='allow-forms' style='border: 0; width: 100%; height: 100%; display: block; background: transparent'> Su navegador no soporta el uso de este tipo de aplicación</iframe> </div>");
+		$('#' + win_id).append("<div class='wmcontain wmc_" + win_idn + "'><iframe src='" + opciones.contenido + "' allowfullscreen allowusermedia sandbox='allow-forms' style='border: 0; width: 100%; height: 100%; display: block; background: transparent'> Su navegador no soporta el uso de este tipo de aplicación</iframe> </div>");
 	} else {
-		$('#'+win_id).append("<div class='wmcontain wmc_"+win_idn+"' style='overflow: auto; padding: 10px;'>Cargando aplicación...</div>");
-		$( ".wmc_"+win_idn ).load( opciones.contenido, function() {
+		$('#' + win_id).append("<div class='wmcontain wmc_" + win_idn + "' style='overflow: auto; padding: 10px;'>Cargando aplicación...</div>");
+		$(".wmc_" + win_idn).load(opciones.contenido, function () {
 			console.warn("Aplicación '" + opciones.nombre + "', cargada.")
 		});
 	}
 
 
-
-
-
-
-
 	// TASKBAR
-	$("#taskmanager").append("<div class='task task_"+win_idn+"'> <img src='"+opciones.icono+"' style='margin-right:4px; width: 16px; height: 16px;' /> "+opciones.nombre+"</div>")
+	$("#taskmanager").append("<div class='task task_" + win_idn + "'> <img src='" + opciones.icono + "' style='margin-right:4px; width: 16px; height: 16px;' /> " + opciones.nombre + "</div>")
 	$(".task").removeClass("activetask");
-	$(".task_"+win_idn).addClass("activetask").on("click", function (e) {
+	$(".task_" + win_idn).addClass("activetask").on("click", function (e) {
 		$(".task").removeClass("activetask");
 		$(this).addClass("activetask");
 		$(".window").removeClass("active");
-		$('#'+win_id).addClass("active");
-		if ($('#'+win_id).hasClass("wminimized")) {
-			$('#'+win_id).removeClass("wminimized");
+		$('#' + win_id).addClass("active");
+		if ($('#' + win_id).hasClass("wminimized")) {
+			$('#' + win_id).removeClass("wminimized");
 		}
 	});
-
-
 
 
 	// TEMAS DE BOTONES PARA MINIMIZAR Y DEMAS
 
-	$(".wmbm_"+win_idn).on("click", function (e) {
-		$('#'+win_id).addClass("wminimized").removeClass("active");
-		setTimeout(function(){ $(".task_"+win_idn).removeClass("activetask"); }, 300);
+	$(".wmbm_" + win_idn).on("click", function (e) {
+		$('#' + win_id).addClass("wminimized").removeClass("active");
+		setTimeout(function () {
+			$(".task_" + win_idn).removeClass("activetask");
+		}, 300);
 	});
 
-	$(".wmbr_"+win_idn).on("click", function (e) {
-		if ($('#'+win_id).hasClass("maximized")) {
-			$('#'+win_id).removeClass("maximized");
+	$(".wmbr_" + win_idn).on("click", function (e) {
+		setTimeout(function () {
+			addResponsiveDesign();
+		}, 300);
+
+		if ($('#' + win_id).hasClass("maximized")) {
+			$('#' + win_id).removeClass("maximized");
 			$(this).html("<i class=\"far fa-window-maximize\"></i>");
 		} else {
-			$('#'+win_id).addClass("maximized");
+
+			$('#' + win_id).addClass("maximized");
 			$(this).html("<i class=\"far fa-window-restore\"></i>");
 		}
 	});
 
-	$( ".wmt_"+win_idn ).dblclick(function() {
-		if ($('#'+win_id).hasClass("maximized")) {
-			$('#'+win_id).removeClass("maximized");
-			$(".wmbr_"+win_idn).html("<i class=\"far fa-window-maximize\"></i>");
+	$(".wmt_" + win_idn).dblclick(function () {
+		setTimeout(function () {
+			addResponsiveDesign();
+		}, 300);
+		if ($('#' + win_id).hasClass("maximized")) {
+			$('#' + win_id).removeClass("maximized");
+			$(".wmbr_" + win_idn).html("<i class=\"far fa-window-maximize\"></i>");
 		} else {
-			$('#'+win_id).addClass("maximized");
-			$(".wmbr_"+win_idn).html("<i class=\"far fa-window-restore\"></i>");
+			$('#' + win_id).addClass("maximized");
+			$(".wmbr_" + win_idn).html("<i class=\"far fa-window-restore\"></i>");
+
 		}
 	});
 
-	$(".wmbc_"+win_idn).on("click", function (e) {
-		$('#'+win_id).addClass("wmcierre");
-		$(".task_"+win_idn).remove();
+	$(".wmbc_" + win_idn).on("click", function (e) {
+		$('#' + win_id).addClass("wmcierre");
+		$(".task_" + win_idn).remove();
 
 
-
-
-
-		opened_windows.forEach(function(elemento, indice) {
-			if(elemento.includes(opciones.contenido)) {
+		opened_windows.forEach(function (elemento, indice) {
+			if (elemento.includes(opciones.contenido)) {
 				toremove = opened_windows[indice];
 				removeFromArray(opened_windows, toremove);
 			}
 
 		});
 
-		setTimeout(function(){ $('#'+win_id).remove(); }, 300);
+		setTimeout(function () {
+			$('#' + win_id).remove();
+		}, 300);
 	});
 
+	/*
+	 * Añadimos soporte para un diseño responsivo
+	 */
+	function addResponsiveDesign() {
+		// 640 * 320
+		var ancho = $(".wmc_" + win_idn).width();
+		var alto = $(".wmc_" + win_idn).height();
 
+		if (ancho <= 640 || alto <= 320) {
+			$(".wmc_"+win_idn).addClass("responsivedesign");
+			$(".wmc_"+win_idn).children("*").addClass("responsivedesign");
+			$(".wmc_"+win_idn).children("*").children("*").addClass("responsivedesign");
+			//console.log(ancho, alto);
+		} else {
+			$(".wmc_"+win_idn).removeClass("responsivedesign");
+			$(".wmc_"+win_idn).children("*").removeClass("responsivedesign");
+			$(".wmc_"+win_idn).children("*").children("*").removeClass("responsivedesign");
+		}
+
+	}
+
+	setTimeout(function () {
+		addResponsiveDesign();
+	}, 350);
+
+	$(window).on("resize", function(e) {
+		addResponsiveDesign();
+	});
+	//addResponsiveDesign();
 	// TEMAS DE MOVIMIENTO
 	$('#'+win_id).pep({
 		cssEaseDuration:300,
@@ -394,37 +408,42 @@ function createwindow(opciones = {nombre: "App"}) {
 
 		},
 	}).on("click", function (e) {
-		$(".window").removeClass("active");
-		$('#'+win_id).addClass("active");
-		$(".task").removeClass("activetask");
-		$(".task_"+win_idn).addClass("activetask");
+	$(".window").removeClass("active");
+	$('#'+win_id).addClass("active");
+	$(".task").removeClass("activetask");
+	$(".task_"+win_idn).addClass("activetask");
 	}).resizable({
-		onDrag: function (e, $el, newWidth, newHeight, opt) {
+	onDrag: function (e, $el, newWidth, newHeight, opt) {
 			// limit box size
-			if (newWidth < 300)
-				newWidth = 300;
-			$($el).css({"max-width": newWidth, "max-height": newHeight})
-			if (newHeight < 200)
-				newHeight = 200;
 
-			$el.width(newWidth);
-			$el.height(newHeight);
+	addResponsiveDesign();
+
+	if (newWidth < 320)
+	newWidth = 320;
+	$($el).css({"max-width": newWidth, "max-height": newHeight})
+	if (newHeight < 200)
+	newHeight = 200;
+
+	$el.width(newWidth);
+	$el.height(newHeight);
 
 			// explicitly return **false** if you don't want
-			// auto-height computation to occur
-			return false;
+	// auto-height computation to occur
+	return false;
 		},
-		onDragStart: function (e, $el, opt) {
-			$el.css("cursor", "nwse-resize");
+	onDragStart: function (e, $el, opt) {
+	$el.css("cursor", "nwse-resize");
+	addResponsiveDesign();
 		},
-		onDragEnd: function (e, $el, opt) {
-			$el.css("cursor", "");
+	onDragEnd: function (e, $el, opt) {
+	$el.css("cursor", "");
+	addResponsiveDesign();
 		},
-		handleSelector: "> .resizer"
+	handleSelector: "> .resizer"
 	});
 	// Guardamos la URL en el array de ventanas abiertas (SI LA HUBIERA, NO REPETIMOS)
 	if (!opened_windows.includes(opciones.contenido, 0)) {
-		opened_windows.push(opciones.contenido + " :-: " + win_idn);
+	opened_windows.push(opciones.contenido + " :-: " + win_idn);
 	}
 
 	return win_id;

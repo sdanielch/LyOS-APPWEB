@@ -188,7 +188,7 @@ echo highlight_string("<?php\n\$data =\n" . var_export($array, true) . ";\n?>");
 * FALSE QUIERE DECIR QUE ALGO FALLÓ A MITAD DE SUBIDA. CON ESTO SE HA DE TRATAR UN IF Y MANDAR LA INFORMACIÓN DEVUELTA A LA BD.
 */
 
-public function subir_al_servidor($files, $fname, $subdirectorio = "res", $name = "") {
+public function subir_al_servidor($files, $fname, $subdirectorio = "Ficheros", $name = "") {
 
         // Cargamos la librería que nos permite conocer la extensión según el tipo de archivo
 
@@ -199,7 +199,7 @@ public function subir_al_servidor($files, $fname, $subdirectorio = "res", $name 
 
 
 
-            $target_dir = WWW_ROOT . "users/" . $subdirectorio . "/"; //DIRECTORIO DE SUBIDA
+            $target_dir = WWW_ROOT . "users/" . $this->Auth->User('id') . "/" . $subdirectorio . "/"; //DIRECTORIO DE SUBIDA
 
         // COMPROBAMOS EL FORMATO PARA LUEGO GUARDAR SU EXTENSION
 
@@ -207,16 +207,20 @@ public function subir_al_servidor($files, $fname, $subdirectorio = "res", $name 
                 $fide = $extension_real;
 
         // DESTINO DEL FICHERO
-            $nomfichero = $name . rand() . rand() . "." .$extension_real;
+            $nomfichero = $name;
             $target_file = $target_dir . $nomfichero; //FICHERO
             $uploadOk = 1;
             $imageFileType = strtolower(pathinfo($target_file,PATHINFO_EXTENSION));
 
         // Comprobamos si el subdirectorio de usuario existe
-            $dir = WWW_ROOT . "users/" . $subdirectorio;
-            if (!file_exists($dir)) {
-                mkdir($dir, 0777);
-            }
+			$udir = WWW_ROOT . "users/" . $this->Auth->User('id');
+            $dir = WWW_ROOT . "users/" . $this->Auth->User('id') . "/" . $subdirectorio;
+	if (!file_exists($udir)) {
+		mkdir($udir, 0777, true);
+	}
+	if (!file_exists($dir)) {
+		mkdir($dir, 0777, true);
+	}
 
         // Comprobamos si el fichero existe
             if (file_exists($target_file)) {
@@ -243,7 +247,7 @@ public function subir_al_servidor($files, $fname, $subdirectorio = "res", $name 
                     shell_exec('ffmpeg -v 10 -y -i '. $target_file .' -acodec libvorbis ' . $target_dir . $randn .'.ogg'); // Convertimos el fichero
                     unlink($target_file); // Borramos el fichero original
                     chdir("/mnt/TB/www/html"); // Volvemos al directorio original
-                    return array("nombre" => $randn.".ogg", "formato" => $fide, "miniatura" => $target_dir . $randn .'.ogg');
+                    return array("nombre" => $subdirectorio . "/" . $randn.".ogg", "formato" => $fide, "miniatura" => $target_dir . $randn .'.ogg');
                 }
 
 
@@ -252,7 +256,7 @@ public function subir_al_servidor($files, $fname, $subdirectorio = "res", $name 
 				else if($ftype == ".mp4" || $ftype == ".avi" || $ftype == ".wmv") {
 
 
-					$randn = $name . rand() . rand();
+					/*$randn = $name . rand() . rand();
 					$commands = array(
 						'ffmpeg -i "'. $target_file .'" -ss 00:00:05.000 -vframes 1 "'. $target_dir . $randn . '.png"',
 					);
@@ -260,8 +264,8 @@ public function subir_al_servidor($files, $fname, $subdirectorio = "res", $name 
 					foreach($commands AS $command){
 						$tmp = shell_exec($command);
 						$output .= htmlentities(trim($tmp)) . "<br />";
-					}
-					return array("nombre" => $nomfichero, "formato" => $fide, "miniatura" => $randn . ".png");
+					}*/
+					return array("nombre" => $subdirectorio . "/" . $nomfichero, "formato" => $fide);
 				}
 
 
@@ -269,7 +273,7 @@ public function subir_al_servidor($files, $fname, $subdirectorio = "res", $name 
 
                 else if ($ftype == ".jpg" || $ftype == ".jpeg" || $ftype == ".gif" || $ftype == ".png" || $ftype == ".bmp") {
 
-					$randn = $name . rand() . rand();
+					/*$randn = $name . rand() . rand();
 					$commands = array(
 						'ffmpeg -i "'. $target_file .'" -q:v 1 -vf scale="640:-1" "'. $target_dir . $randn . $ftype .'"',
 					);
@@ -277,8 +281,8 @@ public function subir_al_servidor($files, $fname, $subdirectorio = "res", $name 
 					foreach($commands AS $command){
 						$tmp = shell_exec($command);
 						$output .= htmlentities(trim($tmp)) . "<br />";
-					}
-					return array("nombre" => $nomfichero, "formato" => $fide, "miniatura" => $randn . $ftype);
+					}*/
+					return array("nombre" => $subdirectorio . "/" . $nomfichero, "formato" => $fide);
 
 				}
 

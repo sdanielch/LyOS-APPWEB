@@ -60,8 +60,8 @@
 	<script src="<?php echo $fundamental_libs; ?>jquery.pep.js"></script>
 	<script src="<?php echo $fundamental_libs; ?>wm_resizable.js"></script>
 	<script src="<?php echo $fundamental_libs; ?>contextmenu.min.js"></script>
-	<script src="<?php echo $fundamental_libs; ?>ResizeSensor.js"></script>
-	<script src="<?php echo $fundamental_libs; ?>ElementQueries.js"></script>
+	<script src="<?php echo $fundamental_libs; ?>jquery.easypiechart.min.js"></script>
+	<script src="<?php echo $fundamental_libs; ?>jquery.form.min.js"></script>
 	<script src="<?php echo $fundamental_libs; ?>jquery.touchSwipe.min.js"></script>
 	<script src="<?php echo $fundamental_libs; ?>popper.min.js"></script>
 	<link rel="stylesheet" href="<?php echo $fundamental_libs; ?>uikit-3.4.6/css/uikit.min.css"/>
@@ -154,8 +154,13 @@
 		}
 
 	</style>
+<?php if(isset($usuario)) {
+	echo '<link type="text/css" href="' . $fundamental_libs . $estilo . '.css" rel="Stylesheet" id="loadestilo">';
+}?>
+
 
 </head>
+
 <body>
 <div id="context-menu" style="display:none;">
 	Cerrar ventana
@@ -185,7 +190,7 @@
 </script>
 <style>
 	#background {
-		background: #282828 url('<?php echo $img;?>default-background.jpg') center center no-repeat;
+		background: #282828 url('<?php echo $wallpaper;?>') center center no-repeat;
 		position: fixed;
 		top: 0; left: 0; right: 0; bottom: 0;
 		z-index: 1;

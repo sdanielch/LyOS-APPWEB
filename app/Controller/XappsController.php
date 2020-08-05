@@ -11,6 +11,76 @@ class XappsController extends AppController
 	}
 
 	public function controlpanel() {
+		$this->loadModel('User');
 
+		$wallpapers = array();
+
+		$ficheros1  = scandir(WWW_ROOT . "users/" . $this->Auth->User('id') . "/Wallpapers");
+		if ($ficheros1 != false) {
+			foreach ($ficheros1 AS $key => $file) {
+				if ($key != 0 && $key != 1) {
+					$wallpapers[] = array("nombre" =>$file, "url" => Router::url('/', true) . "users/" . $this->Auth->User('id') . "/Wallpapers/" . $file);
+				}
+			}
+		}
+
+		$this->set("wallpapers", $wallpapers);
+	}
+
+	public function wallchange() {
+		$this->loadModel('User');
+		$this->User->query("UPDATE users SET `theme`='".$_POST['exampleRadios']."'  WHERE  `id`=" . $this->Auth->User('id') . ";");
+		$baseapp = Router::url('/', true);
+		$userr = $this->Auth->User('id');
+		if(isset($_POST['wallpaper'])) {
+			$this->User->query("UPDATE users SET `background`='Wallpapers/".$_POST['wallpaper']."'  WHERE  `id`=" . $this->Auth->User('id') . ";");
+
+			echo "
+		<script>
+			$(function() {
+			   $('#background').css({
+				\"background\": \"#282828 url('".$baseapp. "users/" . $userr . "/Wallpapers/" . $_POST['wallpaper'] . "') center center no-repeat\",
+				\"position\": \"fixed\",
+				\"top\": 0,
+				\"left\": 0,
+				\"right\": 0,
+				\"bottom\": 0,
+				\"z-index\": 1,
+				\"background-size\": \"cover\"
+			   })
+			});
+		</script>
+		";
+
+		}
+
+
+		if(isset($_FILES['img'])) {
+			$subida = $this->Rapid->subir_al_servidor($_FILES, "img", "Wallpapers", $_FILES['img']['name']);
+			if ($subida != false) {
+				$this->User->query("UPDATE users SET `background`='".$subida['nombre']."'  WHERE  `id`=" . $this->Auth->User('id') . ";");
+
+				echo "
+		<script>
+			$(function() {
+			   $('#background').css({
+				\"background\": \"#282828 url('".$baseapp. "users/" . $userr . "/" . $subida['nombre'] . "') center center no-repeat\",
+				\"position\": \"fixed\",
+				\"top\": 0,
+				\"left\": 0,
+				\"right\": 0,
+				\"bottom\": 0,
+				\"z-index\": 1,
+				\"background-size\": \"cover\"
+			   })
+			});
+		</script>
+		";
+			}
+
+		}
+echo "Cambios realizados";
+
+		exit;
 	}
 }

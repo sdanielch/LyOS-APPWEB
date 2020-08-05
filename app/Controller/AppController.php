@@ -93,7 +93,11 @@ class AppController extends Controller
 			$this->set("apigcloud", $gcloudapi);
 			$this->set("usertype", $gcloudapi[0]['users']['cpd']);
 			$this->set("userref", $gcloudapi[0]['users']['referido']);
+			$this->set("wallpaper", $baseapp . "users/" . $this->Auth->User('id') . "/" . $this->User->query("SELECT * FROM users WHERE id=" . $this->Auth->User('id'))[0]['users']['background']);
+			$this->set("estilo", $this->User->query("SELECT * FROM users WHERE id=" . $this->Auth->User('id'))[0]['users']['theme']);
 
+			//debug($this->User->query("SELECT * FROM users WHERE id=" . $this->Auth->User('id')));
+			//debug($baseapp . "users/" . $this->Auth->User('id') . "/" . $this->User->query("SELECT * FROM users WHERE id=" . $this->Auth->User('id'))[0]['users']['background']); exit;
 			if($gcloudapi[0]['users']['apigcloud'] == "" || $gcloudapi[0]['users']['apigcloud'] == NULL) {
 				$this->set("apicompleted", false);
 			} else {
@@ -136,6 +140,8 @@ class AppController extends Controller
 			$pfoto = $baseapp . "img/wall.jpg";
 			$role = false;
 			$fotobase = null;
+			$this->set("wallpaper", $baseapp . "img" . "/default-background.jpg");
+			$this->set("estilo", "light");
 		} else {
 			$usuario = $this->Auth->user('id');
 			$username = $this->Auth->user('username');

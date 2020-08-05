@@ -1,0 +1,49 @@
+.window {
+	backdrop-filter: blur(20px) saturate(180%);
+	animation-duration: 300ms;
+	animation-name: olauncher;
+	transform: scale(1);
+	background: rgba(0,0,0,0.6);
+	border-radius: 6px 6px 4px 4px;
+	border: 1px solid rgba(255,255,255,0.1);
+	z-index: 500;
+	overflow: hidden;
+	box-shadow: 2px 2px 6px rgba(0,0,0,0.4);
+	min-width: 300px !important;
+	min-height: 200px !important;
+	position: absolute;
+	color: #FFF;
+
+}
+.wmcontain {
+	position: absolute;
+	top: 30px; left: 4px; right: 4px; bottom: 5px;
+	background: rgba(0,0,0,0.5);
+	overflow: hidden;
+	border-radius: 4px;
+	border: 1px rgba(255,255,255,0.2) solid;
+
+}
+
+.wmtitle {
+	position: absolute;
+	top: 0;
+	left:0;
+	right: 0;
+	height: 30px;
+	/*background: rgba(0,0,0,0.4);*/
+	display: flex;
+	align-items: center;
+	justify-content: flex-start;
+	padding-left: 10px;
+	cursor: move;
+	font-weight: bold;
+}
+.close_window_button {
+	color: #FFFFFF;
+	/*background: #881100;*/
+	width: 32px;
+	text-align: center;
+	transition: 300ms;
+	cursor: pointer;
+}
