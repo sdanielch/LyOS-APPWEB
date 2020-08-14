@@ -107,11 +107,11 @@ jQuery(document).ready(function ($) {
 	/*
 	 * Reloj digital
 	 */
-	function startTime() {
-		var today = new Date();
-		var hr = today.getHours();
-		var min = today.getMinutes();
-		var sec = today.getSeconds();
+	 function startTime() {
+	 	var today = new Date();
+	 	var hr = today.getHours();
+	 	var min = today.getMinutes();
+	 	var sec = today.getSeconds();
 		//Add a zero in front of numbers<10
 		min = checkTime(min);
 		sec = checkTime(sec);
@@ -149,10 +149,10 @@ jQuery(document).ready(function ($) {
 			$(e.target).parent().hasClass('ncm') == true ||
 			$(e.target).parent().parent().hasClass('ncm') == true) {
 			//No hacemos nada
-		} else {
-			$("#olaucher").hide(300);
-		}
-	});
+	} else {
+		$("#olaucher").hide(300);
+	}
+});
 
 
 	//$('[data-toggle="tooltip"]').tooltip();
@@ -181,6 +181,8 @@ var opened_windows = [];
 
 function createwindow(opciones = {nombre: "App"}) {
 	$("#olaucher").hide(300);
+
+	$(".window").removeClass("active")
 	// nombre, contenido, icono, tipo, ancho, alto, pi
 
 	if (opciones.icono == undefined) {
@@ -231,9 +233,20 @@ function createwindow(opciones = {nombre: "App"}) {
 		if ($('#win_' + idn).hasClass("wminimized")) {
 			$('#win_' + idn).removeClass("wminimized");
 		}
+
+		setTimeout(function () {
+			$(".window").removeClass("active");
+			$('#win_' + idn).addClass("active");
+		}, 100);
 		// Devolvemos false para salir de la función y no reabrir otro proceso
 		return false;
 	}
+
+
+	setTimeout(function () {
+		$(".window").removeClass("active");
+		$('#win_' + idn).addClass("active");
+	}, 100);
 
 
 	// Posición aleatoria de las ventanas (WM)
@@ -253,7 +266,7 @@ function createwindow(opciones = {nombre: "App"}) {
 	var app_left = getRandom(0, pinki2);
 
 
-	$(".window").removeClass("active")
+	
 
 	// Se crea la ventana
 	$("body").append("<div class='window active' id='" + win_id + "' style='top: " + app_top + "px; left: " + app_left + "px;width: 100%; height: 100%; max-width: " + opciones.ancho + "px; max-height: " + opciones.alto + "px;'><div class='resizer'></div></div>");
@@ -278,14 +291,16 @@ function createwindow(opciones = {nombre: "App"}) {
 	 * CONTENIDO DE LA VENTANA, AQUI SE CARGA SEGUN EL PARÁMETRO QUE LE HAYAMOS INDICADO
 	 */
 
-	if (opciones.tipo == "iframe") {
-		$('#' + win_id).append("<div class='wmcontain wmc_" + win_idn + "'><iframe src='" + opciones.contenido + "' allowfullscreen allowusermedia sandbox='allow-forms' style='border: 0; width: 100%; height: 100%; display: block; background: transparent'> Su navegador no soporta el uso de este tipo de aplicación</iframe> </div>");
-	} else {
-		$('#' + win_id).append("<div class='wmcontain wmc_" + win_idn + "' style='overflow: auto; padding: 10px;'>Cargando aplicación...</div>");
-		$(".wmc_" + win_idn).load(opciones.contenido, function () {
-			console.warn("Aplicación '" + opciones.nombre + "', cargada.")
-		});
-	}
+	 if (opciones.tipo == "iframe") {
+	 	$('#' + win_id).append("<div class='wmcontain wmc_" + win_idn + "'><iframe src='" + opciones.contenido + "' allowfullscreen allowusermedia sandbox='allow-forms' style='border: 0; width: 100%; height: 100%; display: block; background: transparent'> Su navegador no soporta el uso de este tipo de aplicación</iframe> </div>");
+	 } else if(opciones.tipo == "jpg" || opciones.tipo == "jpeg" || opciones.tipo == "gif" || opciones.tipo == "png" || opciones.tipo == "bmp") {
+	 	$('#' + win_id).append("<div class='wmcontain wmc_" + win_idn + "' style=' background: url(" + opciones.contenido + ") center center no-repeat; background-size: contain;'></div>");
+	 } else {
+	 	$('#' + win_id).append("<div class='wmcontain wmc_" + win_idn + "' style='overflow: auto; padding: 10px;'>Cargando aplicación...</div>");
+	 	$(".wmc_" + win_idn).load(opciones.contenido, function () {
+	 		console.warn("Aplicación '" + opciones.nombre + "', cargada.")
+	 	});
+	 }
 
 
 	// TASKBAR
@@ -361,7 +376,7 @@ function createwindow(opciones = {nombre: "App"}) {
 	/*
 	 * Añadimos soporte para un diseño responsivo
 	 */
-	function addResponsiveDesign() {
+	 function addResponsiveDesign() {
 		// 640 * 320
 		var ancho = $(".wmc_" + win_idn).width();
 		var alto = $(".wmc_" + win_idn).height();
@@ -408,42 +423,42 @@ function createwindow(opciones = {nombre: "App"}) {
 
 		},
 	}).on("click", function (e) {
-	$(".window").removeClass("active");
-	$('#'+win_id).addClass("active");
-	$(".task").removeClass("activetask");
-	$(".task_"+win_idn).addClass("activetask");
+		$(".window").removeClass("active");
+		$('#'+win_id).addClass("active");
+		$(".task").removeClass("activetask");
+		$(".task_"+win_idn).addClass("activetask");
 	}).resizable({
-	onDrag: function (e, $el, newWidth, newHeight, opt) {
+		onDrag: function (e, $el, newWidth, newHeight, opt) {
 			// limit box size
 
-	addResponsiveDesign();
+			addResponsiveDesign();
 
-	if (newWidth < 320)
-	newWidth = 320;
-	$($el).css({"max-width": newWidth, "max-height": newHeight})
-	if (newHeight < 200)
-	newHeight = 200;
+			if (newWidth < 320)
+				newWidth = 320;
+			$($el).css({"max-width": newWidth, "max-height": newHeight})
+			if (newHeight < 200)
+				newHeight = 200;
 
-	$el.width(newWidth);
-	$el.height(newHeight);
+			$el.width(newWidth);
+			$el.height(newHeight);
 
 			// explicitly return **false** if you don't want
 	// auto-height computation to occur
 	return false;
-		},
-	onDragStart: function (e, $el, opt) {
+},
+onDragStart: function (e, $el, opt) {
 	$el.css("cursor", "nwse-resize");
 	addResponsiveDesign();
-		},
-	onDragEnd: function (e, $el, opt) {
+},
+onDragEnd: function (e, $el, opt) {
 	$el.css("cursor", "");
 	addResponsiveDesign();
-		},
-	handleSelector: "> .resizer"
-	});
+},
+handleSelector: "> .resizer"
+});
 	// Guardamos la URL en el array de ventanas abiertas (SI LA HUBIERA, NO REPETIMOS)
 	if (!opened_windows.includes(opciones.contenido, 0)) {
-	opened_windows.push(opciones.contenido + " :-: " + win_idn);
+		opened_windows.push(opciones.contenido + " :-: " + win_idn);
 	}
 
 	return win_id;

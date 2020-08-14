@@ -453,8 +453,9 @@ html, body {
 	position: absolute;
 	top: 0;
 	left:0;
-	right: 0;
+	right: 100px;
 	height: 30px;
+	padding-right: 100px;
 	/*background: rgba(0,0,0,0.4);*/
 	display: flex;
 	align-items: center;
@@ -462,6 +463,9 @@ html, body {
 	padding-left: 10px;
 	cursor: move;
 	font-weight: bold;
+	white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
 .wmbuttons {
@@ -587,6 +591,9 @@ html, body {
 	cursor: pointer;
 	font-size: 14px;
 	transition: 1400ms;
+	white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
 .activetask {
@@ -627,4 +634,52 @@ html, body {
 }
 *:focus {
 	outline: none !important;
+}
+
+.files {
+	text-align: center;
+	position: relative;
+	display: inline-block;
+	width: 120px;
+	height: 140px;
+	border: 1px #000 solid;
+	margin: 4px;
+	transition: 300ms;
+	cursor: pointer;
+	border-radius: 8px;
+	white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.files:hover, .files:active {
+	border-color: #FF0000;
+}
+.barfiles {
+	display: block;
+	position: relative;
+	height: 36px;
+	background: rgba(40,100,255,0.75);
+	color: #FFF;
+	margin: -10px;
+    margin-bottom: 5px;
+    border-bottom: 1px rgba(0,0,0,0.1) solid;
+     display: flex;
+  align-items: center;
+  justify-content: flex-start;
+}
+
+.barfiles span {
+	 display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-left: 10px;
+  cursor: pointer;
+  border: 1px rgba(255,255,255,0.2) solid;
+  border-radius: 4px;
+  padding: 4px;
+}
+.barfiles span:hover,.barfiles span:active {
+	border: 1px rgba(255,255,255,0.4) solid;
+	background: rgba(255,255,255,0.2);
+	transition: 100ms;
 }

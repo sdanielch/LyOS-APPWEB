@@ -226,7 +226,7 @@
 		display: none;
 		position: relative;
 		margin: 20px;
-		width: 400px;
+		width: calc(100% - 180px);
 		background-color: #ddd;
 		border: 1px solid blue;
 		padding: 1px;
