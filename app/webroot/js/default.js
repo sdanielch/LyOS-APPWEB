@@ -246,6 +246,8 @@ function createwindow(opciones = {nombre: "App"}) {
 	setTimeout(function () {
 		$(".window").removeClass("active");
 		$('#win_' + idn).addClass("active");
+		//$(".task").removeClass("activetask");
+		//$(".task_" + idn).addClass("activetask");
 	}, 100);
 
 
@@ -292,9 +294,11 @@ function createwindow(opciones = {nombre: "App"}) {
 	 */
 
 	 if (opciones.tipo == "iframe") {
-	 	$('#' + win_id).append("<div class='wmcontain wmc_" + win_idn + "'><iframe src='" + opciones.contenido + "' allowfullscreen allowusermedia sandbox='allow-forms' style='border: 0; width: 100%; height: 100%; display: block; background: transparent'> Su navegador no soporta el uso de este tipo de aplicación</iframe> </div>");
+	 	$('#' + win_id).append("<div class='wmcontain wmc_" + win_idn + "'><iframe src='" + opciones.contenido + "' allowfullscreen allowusermedia style='border: 0; width: 100%; height: 100%; display: block; background: transparent'> Su navegador no soporta el uso de este tipo de aplicación</iframe> </div>");
 	 } else if(opciones.tipo == "jpg" || opciones.tipo == "jpeg" || opciones.tipo == "gif" || opciones.tipo == "png" || opciones.tipo == "bmp") {
 	 	$('#' + win_id).append("<div class='wmcontain wmc_" + win_idn + "' style=' background: url(" + opciones.contenido + ") center center no-repeat; background-size: contain;'></div>");
+	 } else if(opciones.tipo == "pdf" || opciones.tipo == "doc" || opciones.tipo == "docx" || opciones.tipo == "txt" || opciones.tipo == "xls" || opciones.tipo == "xls" || opciones.tipo == "odt") {
+	 	$('#' + win_id).append("<div class='wmcontain wmc_" + win_idn + "'><iframe src='https://drive.google.com/viewerng/viewer?url=" + opciones.contenido + "?pid=explorer&efh=false&a=v&chrome=false&embedded=true' embedded=true allowfullscreen allowusermedia style='border: 0; width: 100%; height: 100%; display: block; background: transparent'> Su navegador no soporta el uso de este tipo de aplicación</iframe> </div>");
 	 } else {
 	 	$('#' + win_id).append("<div class='wmcontain wmc_" + win_idn + "' style='overflow: auto; padding: 10px;'>Cargando aplicación...</div>");
 	 	$(".wmc_" + win_idn).load(opciones.contenido, function () {
@@ -304,7 +308,7 @@ function createwindow(opciones = {nombre: "App"}) {
 
 
 	// TASKBAR
-	$("#taskmanager").append("<div class='task task_" + win_idn + "'> <img src='" + opciones.icono + "' style='margin-right:4px; width: 16px; height: 16px;' /> " + opciones.nombre + "</div>")
+	$("#taskmanager").append("<div class='task task_" + win_idn + "'> <img src='" + opciones.icono + "' style='margin-right:4px; width: 16px; height: 16px;' /><span> " + opciones.nombre + "</span></div>")
 	$(".task").removeClass("activetask");
 	$(".task_" + win_idn).addClass("activetask").on("click", function (e) {
 		$(".task").removeClass("activetask");
@@ -463,3 +467,15 @@ handleSelector: "> .resizer"
 
 	return win_id;
 }
+
+function bytesToSize(bytes) {
+	var sizes = ['Bytes', 'KB', 'MB', 'GB', 'TB'];
+	if (bytes == 0) return 'n/a';
+	var i = parseInt(Math.floor(Math.log(bytes) / Math.log(1024)));
+	if (i == 0) return bytes + ' ' + sizes[i];
+	return (bytes / Math.pow(1024, i)).toFixed(1) + ' ' + sizes[i];
+};
+
+
+
+javascript:(function(){var script=document.createElement('script');script.onload=function(){var stats=new Stats();document.body.appendChild(stats.dom);requestAnimationFrame(function loop(){stats.update();requestAnimationFrame(loop)});};script.src='//mrdoob.github.io/stats.js/build/stats.min.js';document.head.appendChild(script);})()

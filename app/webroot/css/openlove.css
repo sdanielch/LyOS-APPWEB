@@ -438,6 +438,17 @@ html, body {
 		bottom: 32px !important;
 		transition: 300ms !important;
 	}
+	.task {
+		text-align: center !important;
+		width: 36px !important;
+		justify-content: center !important;
+		padding-left: 0px !important; 
+        padding-right: 0px !important;
+        margin-right: 0px !important;
+	}
+	.task span {
+		display: none !important;
+	}
 }
 .wmcontain {
 	position: absolute;
@@ -551,7 +562,9 @@ html, body {
 	bottom: auto !important;
 	transition: 300ms !important;
 	position: fixed !important;
-	opacity: 0;
+	opacity: 0 !important;
+	transform: scale(0.2) !important;
+	background: #000 !important;
 
 }
 
@@ -581,26 +594,44 @@ html, body {
 .task {
 	width: 100%;
 	position: relative;
-	max-width: 160px;
-	border: 2px rgba(150,150,150,0.4) ridge;
+	max-width: 140px;
+	/*border: 2px rgba(150,150,150,0.4) ridge;*/
 	height: 26px;
-	border-radius: 4px;
-	margin-left: 4px;
-	padding-left: 4px;
-	background: rgba(255,255,255,0.2);
+	/*border-radius: 4px;*/
+	padding-left: 7px;
+	padding-right: 16px;
+	margin-right: 3px;
+	/*background: rgba(255,255,255,0.2);*/
 	cursor: pointer;
 	font-size: 14px;
-	transition: 1400ms;
+	transition: 300ms;
 	white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
+  background: url('../img/vixta/A.PNG') center center no-repeat;
+  background-size: 100% 100%;
+  font-size: 12px;
+  display: flex;
+	align-items: center;
+	justify-content: flex-start;
+}
+
+.task:hover,.task:active {
+ background: url('../img/vixta/B.PNG') center center no-repeat;
+  background-size: 100% 100%;
 }
 
 .activetask {
-	border: 2px rgba(80,80,80,0.4) groove;
-	background: rgba(55,55,55,0.2);
+	/*border: 2px rgba(80,80,80,0.4) groove;*/
+	/*background: rgba(55,55,55,0.2);*/
+	background: url('../img/vixta/C.PNG') center center no-repeat;
+  background-size: 100% 100%;
 }
 
+.activetask:hover, .activetask:active {
+	background: url('../img/vixta/F.PNG') center center no-repeat;
+  background-size: 100% 100%;
+}
 
 .mopciones button, .mopciones a:link, .mopciones a:visited, .mopciones a {
 	border: 1px rgba(255,255,255,.4) outset;

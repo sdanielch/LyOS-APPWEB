@@ -173,6 +173,7 @@ class AppController extends Controller
 		$this->set('files', $baseapp . "files" . "/");
 		$this->set('script', $baseapp . "js" . "/");
 		$this->set('fundamental_libs', $baseapp . "fundamental_libs" . "/");
+		$this->set('iapps', $baseapp . "iapps" . "/");
 		$this->set('usuario', $usuario);
 		$this->set('pfoto', $pfoto);
 		$this->set('debug', Configure::read('debug'));

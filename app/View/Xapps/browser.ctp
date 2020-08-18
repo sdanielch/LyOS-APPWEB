@@ -41,14 +41,19 @@ function getFileExtension(filename) {
 
 				} else {
 					console.log(index + ": fichero - " + $(this).attr("data-name"));
+					
 					$(this).on("click", function(e) {
 						//ira(url + $(this).attr("data-name"));
 						console.log("Creando ventana para la extension:" + getFileExtension($(this).attr("data-name")))
+						console.log(index + ": fichero - " + $(this).attr("data-imagen"));
+						console.log(index + ": fichero - " + $(this).data("imagen"));
 						createwindow({
 							nombre: $(this).attr("data-name"),
 							tipo: ""+getFileExtension($(this).attr("data-name"))+"",
 							pi: false,
+							icono:  $(this).attr("data-imagen"),
 							contenido: "<?php echo $base;?>app/webroot/users/<?php echo $usuario;?>" + historial + "/" + $(this).attr("data-name")
+							
 						});
 					});
 				}

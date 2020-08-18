@@ -1,17 +1,17 @@
 .window {
-	backdrop-filter: blur(20px) saturate(180%);
+	/*backdrop-filter: blur(20px) saturate(180%);
 	animation-duration: 300ms;
 	animation-name: olauncher;
-	transform: scale(1);
+	transform: scale(1);*/
 	background: rgba(0,0,0,0.6);
-	border-radius: 6px 6px 4px 4px;
+	/*border-radius: 6px 6px 4px 4px;*/
 	border: 1px solid rgba(255,255,255,0.1);
-	z-index: 500;
-	overflow: hidden;
+	/*z-index: 500;
+	overflow: hidden;*/
 	box-shadow: 2px 2px 6px rgba(0,0,0,0.4);
-	min-width: 300px !important;
-	min-height: 200px !important;
-	position: absolute;
+	/*min-width: 300px !important;
+	min-height: 200px !important;*/
+	/*position: absolute;*/
 	color: #FFF;
 
 }
