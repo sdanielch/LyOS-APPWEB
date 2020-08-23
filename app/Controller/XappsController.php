@@ -112,27 +112,28 @@ public function browser() {
 		$base = Router::url('/', true) . "app/webroot/img/";
 		$base2 = Router::url('/', true) . "app/webroot/" . "/";
 		$directorio2 = $base2 . "users/" . $this->Auth->User('id') . $_POST["directorio"];
+		$being = Router::url('/', true);
 
 		foreach ($directorios as $key2 => $f) {
-			
+
 			if($f["directory"] == true) {
 				echo "<div class='files isfolder' data-name='".$f['name']."'>
 				<img src='". $base ."folder.png' style='width: 100%;' />
 				<br />
 
 				<span>".$f['name']."</span>
-				</div>";	
+				</div>";
 			} else {
 
 				$file_ext = ltrim(strstr($f['name'], '.'), '.');
 				if ($file_ext == "jpg" || $file_ext == "jpeg" || $file_ext == "JPG" || $file_ext == "JPEG" || $file_ext == "png" || $file_ext == "PNG" || $file_ext == "gif" || $file_ext == "GIF" || $file_ext == "bmp" || $file_ext == "BMP") {
-					
+
 					$imagen = $directorio2 . "/" . $f['name'];
 
 					echo "<div class='files isfile' data-name='".$f['name']."' data-imagen='".$base."image.png'>
 				<div style='position: absolute; top: 0; left: 0; bottom: 0; right: 0; background: url(\"".$imagen."\") center center no-repeat; background-size: 100% 100%; filter: blur(8px); z-index: -1;'></div>
 				<div style='position: absolute; top: 0; left: 0; bottom: 0; right: 0; background: url(\"".$imagen."\") center center no-repeat; background-size: contain; filter: blur(0px); z-index: 0;'></div>
-				
+
 
 				<span style='position: absolute; bottom: 0; left: 0; white-space: nowrap;
   overflow: hidden;
@@ -153,12 +154,107 @@ public function browser() {
 
 				}
 
-				
+
 
 			}
-			
+
 
 		}
+
+
+		// Esto siempre se va a mostrar, es el formulario de subida
+		echo "
+<div class='js-upload22 uk-placeholder uk-text-center' style='margin-top: 5px;'>
+										<span uk-icon='icon: cloud-upload'></span>
+										<span class='uk-text-middle'>Arrastra tus archivos al cuadro o </span>
+										<div uk-form-custom>
+											<input type='file' name='gallery' accept='image/*,video/*' multiple>
+											<input type='hidden' name='directorio' value='".$_POST["directorio"]."' />
+											<span class='uk-link'>pincha aquí para seleccionarlos</span>
+										</div>
+									</div>
+									<div id='errores' style='color: #FF0000; display: none; width: 100%; '></div>
+									<progress id='js-progressbar22' class='uk-progress' value='0' max='100'
+											  hidden></progress>
+
+		<script>
+		var bar22 = document.getElementById('js-progressbar22');
+
+											UIkit.upload('.js-upload22', {
+
+												url: '".$being."xapps/uploadtoserver/',
+												multiple: true,
+												method: 'POST',
+												name: 'gallery',
+												mime: 'image/*|video/*|audio/*|*',
+												'msg-invalid-mime': 'Tipo de fichero no válido: %s',
+												'msg-invalid-name': 'Nombre de fichero no válido: %s',
+
+												beforeSend: function (environment) {
+													//console.log('beforeSend', arguments);
+
+													// The environment object can still be modified here.
+													// var {data, method, headers, xhr, responseType} = environment;
+
+												},
+												beforeAll: function () {
+													//console.log('beforeAll', arguments);
+												},
+												load: function () {
+													//console.log('load', arguments);
+												},
+												error: function () {
+													console.log('Error en la subida :' + arguments[0].response);
+												},
+												complete: function (e) {
+													//jacintocasio
+
+													console.log(e);
+												},
+
+												loadStart: function (e) {
+													//console.log('loadStart', arguments);
+
+													bar22.removeAttribute('hidden');
+													bar22.max = e.total;
+													bar22.value = e.loaded;
+												},
+
+												progress: function (e) {
+													//console.log('progress', arguments);
+
+													bar22.max = e.total;
+													bar22.value = e.loaded;
+												},
+
+												loadEnd: function (e) {
+													//console.log('loadEnd', arguments);
+
+													bar22.max = e.total;
+													bar22.value = e.loaded;
+												},
+
+												completeAll: function (e) {
+													//console.log('completeAll', arguments);
+
+													setTimeout(function () {
+														bar22.setAttribute('hidden', 'hidden');
+													}, 1000);
+
+													//console.log(e);
+												},
+
+												fail: function (e) {
+													console.log('Alguno de los archivos seleccionados no reunen los requisitos de subida: ' + e);
+													$('#errores').html('Alguno de los archivos seleccionados no reunen los requisitos de subida: ' + e).show(300);
+
+												}
+
+											});
+
+		</script>
+
+		";
 
 		exit;
 	}
@@ -166,10 +262,15 @@ public function browser() {
 }
 
 
+public function uploadtoserver() {
+	echo $_POST['directorio'];
+	exit;
+}
+
 
 
 public function fyoutube() {
-	
+
 }
 
 
