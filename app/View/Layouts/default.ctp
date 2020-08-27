@@ -255,7 +255,7 @@ echo $this->fetch('script');
 
 
 	<div id="trayicons">
-		<i class="fas fa-memory" style="margin-right: 8px;"></i>
+		<i class="fas fa-memory" id="memo" style="margin-right: 8px; cursor: pointer;"></i>
 		<div id="clock"></div>
 
 

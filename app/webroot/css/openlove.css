@@ -673,7 +673,7 @@ html, body {
 	display: inline-block;
 	width: 120px;
 	height: 140px;
-	border: 1px #000 solid;
+	border: 1px rgba(100,100,100,0.6) solid;
 	margin: 4px;
 	transition: 300ms;
 	cursor: pointer;
@@ -681,6 +681,7 @@ html, body {
 	white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
+	padding: 10px;
 }
 .files:hover, .files:active {
 	border-color: #FF0000;

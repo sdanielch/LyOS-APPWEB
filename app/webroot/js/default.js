@@ -154,6 +154,9 @@ jQuery(document).ready(function ($) {
 	}
 });
 
+	$("#memo").on("click", function (e) {
+		javascript:(function(){var script=document.createElement('script');script.onload=function(){var stats=new Stats();document.body.appendChild(stats.dom);requestAnimationFrame(function loop(){stats.update();requestAnimationFrame(loop)});};script.src='//mrdoob.github.io/stats.js/build/stats.min.js';document.head.appendChild(script);})()
+	});
 
 	//$('[data-toggle="tooltip"]').tooltip();
 
@@ -268,7 +271,7 @@ function createwindow(opciones = {nombre: "App"}) {
 	var app_left = getRandom(0, pinki2);
 
 
-	
+
 
 	// Se crea la ventana
 	$("body").append("<div class='window active' id='" + win_id + "' style='top: " + app_top + "px; left: " + app_left + "px;width: 100%; height: 100%; max-width: " + opciones.ancho + "px; max-height: " + opciones.alto + "px;'><div class='resizer'></div></div>");
@@ -478,4 +481,4 @@ function bytesToSize(bytes) {
 
 
 
-javascript:(function(){var script=document.createElement('script');script.onload=function(){var stats=new Stats();document.body.appendChild(stats.dom);requestAnimationFrame(function loop(){stats.update();requestAnimationFrame(loop)});};script.src='//mrdoob.github.io/stats.js/build/stats.min.js';document.head.appendChild(script);})()
+//javascript:(function(){var script=document.createElement('script');script.onload=function(){var stats=new Stats();document.body.appendChild(stats.dom);requestAnimationFrame(function loop(){stats.update();requestAnimationFrame(loop)});};script.src='//mrdoob.github.io/stats.js/build/stats.min.js';document.head.appendChild(script);})()
