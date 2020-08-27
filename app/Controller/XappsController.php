@@ -94,6 +94,8 @@ public function browser() {
 
 		$directorio =  WWW_ROOT . "users/" . $this->Auth->User('id') . $_POST["directorio"];
 
+		//var_dump($directorio); exit;
+
 
 		$directorios = array();
 
@@ -114,10 +116,14 @@ public function browser() {
 		$directorio2 = $base2 . "users/" . $this->Auth->User('id') . $_POST["directorio"];
 		$being = Router::url('/', true);
 
+		$ruta_relativa = "users/" . $this->Auth->User('id') . $_POST["directorio"];
+
 		foreach ($directorios as $key2 => $f) {
 
+			$ruta_relativa2 = "users/" . $this->Auth->User('id') . $_POST["directorio"] . "/" . $f['name'];
+
 			if($f["directory"] == true) {
-				echo "<div class='files isfolder' data-name='".$f['name']."'>
+				echo "<div class='files isfolder' id='EB".$f['name']."' data-name='".$f['name']."' data-relative='".$ruta_relativa2."'>
 				<img src='". $base ."folder.png' style='width: 100%;' />
 				<br />
 
@@ -130,7 +136,7 @@ public function browser() {
 
 					$imagen = $directorio2 . "/" . $f['name'];
 
-					echo "<div class='files isfile' data-name='".$f['name']."' data-imagen='".$base."image.png'>
+					echo "<div class='files isfile' data-name='".$f['name']."' data-imagen='".$base."image.png' data-relative='".$ruta_relativa2."'>
 				<div style='position: absolute; top: 0; left: 0; bottom: 0; right: 0; background: url(\"".$imagen."\") center center no-repeat; background-size: 100% 100%; filter: blur(8px); z-index: -1;'></div>
 				<div style='position: absolute; top: 0; left: 0; bottom: 0; right: 0; background: url(\"".$imagen."\") center center no-repeat; background-size: contain; filter: blur(0px); z-index: 0;'></div>
 
@@ -145,7 +151,7 @@ public function browser() {
 
 				} else {
 
-					echo "<div class='files isfile' data-name='".$f['name']."' data-imagen='".$base."file.png'>
+					echo "<div class='files isfile' data-name='".$f['name']."' data-imagen='".$base."file.png' data-relative='".$ruta_relativa2."'>
 				<img src='". $base ."file.png' style='width: 100%;' />
 				<br />
 
@@ -166,18 +172,57 @@ public function browser() {
 		echo "
 <div class='js-upload22 uk-placeholder uk-text-center' style='margin-top: 5px;'>
 										<span uk-icon='icon: cloud-upload'></span>
-										<span class='uk-text-middle'>Arrastra tus archivos al cuadro o </span>
+										<span class='uk-text-middle'>Arrastra tus archivos al cuadro para subir ficheros a este directorio</span>
 										<div uk-form-custom>
-											<input type='file' name='gallery' accept='image/*,video/*' multiple>
+											<input type='file' id='slct' name='gallery' accept='image/*,video/*' multiple>
 											<input type='hidden' name='directorio' value='".$_POST["directorio"]."' />
-											<span class='uk-link'>pincha aquí para seleccionarlos</span>
+										<span class='uk-link' style='display: none'>pincha aquí para seleccionarlos</span>
 										</div>
 									</div>
 									<div id='errores' style='color: #FF0000; display: none; width: 100%; '></div>
 									<progress id='js-progressbar22' class='uk-progress' value='0' max='100'
 											  hidden></progress>
 
+
+		<style>
+		 .dfile {
+		 position: absolute;
+		 top: 5px;
+		 right: 5px;
+		 z-index: 30;
+		 background: rgba(200,10,10,0.25);
+		 border-radius: 50px;
+		 width: 34px;
+		 height: 34px;
+		 padding: 5px;
+		 transition: 300ms;
+		 }
+		 .dfile:hover, .dfile:active {
+		 background: rgba(200,10,10,0.85);
+		 }
+		</style>
+
 		<script>
+
+
+
+		$('.files').append('<div class=\"dfile\"> <i class=\"fas fa-trash-alt\"></i> </div>');
+		$('.dfile').on('click', function (e) {
+		        e.preventDefault();
+			console.warn($(this).parent().attr('data-relative'));
+
+			$.post( '".$being."xapps/deletefile', { fichero: $(this).parent().attr('data-relative') })
+			  .done(function( data ) {
+				console.warn(data);
+				h2 = historial.join(\"/\");
+				ira(h2);
+			  });
+
+			return false;
+		});
+
+		$('#EBWallpapers .dfile').hide();
+
 		var bar22 = document.getElementById('js-progressbar22');
 
 											UIkit.upload('.js-upload22', {
@@ -239,6 +284,8 @@ public function browser() {
 
 													setTimeout(function () {
 														bar22.setAttribute('hidden', 'hidden');
+														h2 = historial.join(\"/\");
+														ira(h2);
 													}, 1000);
 
 													//console.log(e);
@@ -255,6 +302,10 @@ public function browser() {
 		</script>
 
 		";
+		/*
+		 * Guardamos en sesión el directorio actual
+		 */
+		$_SESSION['directorio'] = $_POST["directorio"];
 
 		exit;
 	}
@@ -263,7 +314,22 @@ public function browser() {
 
 
 public function uploadtoserver() {
-	echo $_POST['directorio'];
+	//var_dump($_SESSION['directorio']);
+	/*
+	 * Recuperamos el directorio de sesión
+	 */
+	$subida = $this->Rapid->subir_al_servidor($_FILES, "gallery", $_SESSION['directorio'], $_FILES['gallery']['name']);
+	if ($subida != false) {
+		echo "OK";
+	} else {
+		echo "NOP";
+	}
+	exit;
+}
+
+public function deletefile() {
+	delete_files(WWW_ROOT . "/" .$_POST['fichero']);
+	echo "Fichero eliminado";
 	exit;
 }
 
@@ -271,6 +337,12 @@ public function uploadtoserver() {
 
 public function fyoutube() {
 
+}
+
+
+public function newfolder() {
+	mkdir(WWW_ROOT . "users/" . $this->Auth->User('id') . $_POST['actual'] . "/" . $_POST['nuevo'], 0777, true);
+	exit;
 }
 
 

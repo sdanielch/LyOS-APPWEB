@@ -69,7 +69,8 @@ echo "Wherever you Are";
 <script src="<?php echo $fundamental_libs; ?>uikit-3.4.6/js/uikit-icons.min.js"></script>
 <link rel="stylesheet" href="<?php echo $fundamental_libs; ?>bootstrap-4.4.1-dist/css/bootstrap.min.css"/>
 <script src="<?php echo $fundamental_libs; ?>bootstrap-4.4.1-dist/js/bootstrap.min.js"></script>
-<script src="<?php echo $fundamental_libs; ?>fontawesome-free-5.13.0-web/js/all.min.js"></script>
+	<script src="<?php echo $fundamental_libs; ?>fontawesome-free-5.13.0-web/js/all.min.js"></script>
+	<script src="<?php echo $fundamental_libs; ?>bootbox/bootbox.all.min.js"></script>
 <link href="<?php echo $fundamental_libs; ?>animate.min.css" rel="stylesheet"
 type="text/css">
 <link rel="stylesheet" href="<?php echo $fundamental_libs; ?>uitable.css"/>
@@ -254,7 +255,7 @@ echo $this->fetch('script');
 
 
 	<div id="trayicons">
-
+		<i class="fas fa-memory" style="margin-right: 8px;"></i>
 		<div id="clock"></div>
 
 
