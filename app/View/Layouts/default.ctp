@@ -229,14 +229,15 @@ echo $this->fetch('script');
 
 
 		<button type="button" onclick="createwindow({nombre: 'Panel de control', tipo: 'ajax', pi: false, contenido: '<?php echo $base;?>xapps/controlpanel', ancho: 800, alto: 450, icono: '<?php echo $img;?>controlpanel.png'})">Panel de control</button>
+			<button type="button" onclick="createwindow({nombre: 'LineTube', tipo: 'ajax', pi: false, contenido: '<?php echo $base;?>xapps/fyoutube', ancho: 800, alto: 450, icono: '<?php echo $img;?>youtube.png'})">LineTube</button>
 
-		<button type="button" onclick="createwindow({nombre: 'LineTube', tipo: 'ajax', pi: false, contenido: '<?php echo $base;?>xapps/fyoutube', ancho: 800, alto: 450, icono: '<?php echo $img;?>youtube.png'})">LineTube</button>
-
-
-
+			<button type="button" onclick="createwindow({nombre: 'Calendario', tipo: 'ajax', pi: false, contenido: '<?php echo $base;?>xapps/calendario', ancho: 800, alto: 450, icono: '<?php echo $img;?>youtube.png'})">Calendario</button>
 
 
-		<a href="<?php echo $base;?>users/logout">Cerrar sesión</a>
+
+
+
+			<a href="<?php echo $base;?>users/logout">Cerrar sesión</a>
 		<?php } ?>
 	</div>
 </div>

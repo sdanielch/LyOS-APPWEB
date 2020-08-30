@@ -24,6 +24,8 @@
 			$(seccion).show(300);
 		});
 
+		$("#home").show(300);
+
 		$(".theme").on("click", function (e) {
 			$("#loadestilo").remove();
 			$("head").append('<link type="text/css" href="<?php echo $fundamental_libs;?>'+ $(this).val() +'.css" rel="Stylesheet" id="loadestilo">')

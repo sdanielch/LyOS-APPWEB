@@ -345,6 +345,12 @@ public function newfolder() {
 	exit;
 }
 
+/*
+ * Calendario integrado en la app
+ */
+public function calendario() {
+
+}
 
 
 
